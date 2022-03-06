@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="users")
-public class User {
+public class AppUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +32,7 @@ public class User {
 	@Size(min = 4, max = 255)
 	@Column(name = "password", nullable = false)
 	private String password;
+	
+	private boolean admin;
+	private String role;
 }
