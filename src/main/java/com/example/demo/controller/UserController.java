@@ -46,7 +46,7 @@ public class UserController {
 		boolean RegistrationResult = appUserService.RegistrationUser(appUser);
 		
 		if(RegistrationResult) {
-			redirectAttributes.addFlashAttribute("message", "登録しました。");
+			redirectAttributes.addFlashAttribute("success", "登録しました。");
 			return "/home";
 		} else {
 			model.addAttribute("message", "登録に失敗しました。");
