@@ -9,18 +9,16 @@
 <form th:action="@{/login}" method="post">
   <div th:if="${param.error}">
     ログインに失敗しました。
-    <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
-      <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
-    </div>
   </div>
-  <div th:if="${param.logout}">
+  <!-- <div th:if="${param.logout}">
     ログアウトしました。
-  </div>
-  <label for="email">ユーザー名</label>
+  </div> -->
+  <label for="email">メールアドレス</label>
   <input type="text" id="email" name="email"><br>
   <label for="password">パスワード</label>
   <input type="password" id="password" name="password"><br>
   <button type="submit">ログイン</button>
 </form>
+<a href="/register">ユーザー登録はこちら</a>
 </body>
 </html>
