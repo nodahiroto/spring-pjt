@@ -8,5 +8,6 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
 	public AppUser findByEmail(String email);
 	
+	// 指定のメールアドレスが存在するか
 	boolean existsByEmail(String email);
 }
