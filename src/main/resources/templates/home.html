@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ホーム画面</title>
 </head>
 <body>
-
+<h2>ホーム画面</h2>
+<div th:if="${success}">[[${success}]]</div>
+<form th:action="@{/logout}" method="post">
+  <input type="submit" value="ログアウト">
+</form>
 </body>
 </html>
