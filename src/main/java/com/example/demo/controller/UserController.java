@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,8 +21,16 @@ public class UserController {
 
 	private final AppUserService appUserService;
 	
+	@GetMapping("/")
+	public String first (@ModelAttribute AppUser appUser, Authentication loginUser) {
+		if(loginUser != null) {
+			return "/home";
+		}
+		return "/login";
+	}
+	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@ModelAttribute AppUser appUser) {
 		return "/login";
 	}
 	
@@ -31,7 +40,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/register")
-	public String register() {
+	public String register(@ModelAttribute AppUser appUser) {
 		return "/register";
 	}
 	
