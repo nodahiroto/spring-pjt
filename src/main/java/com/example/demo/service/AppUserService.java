@@ -34,6 +34,10 @@ public class AppUserService {
 		// データベースに反映
 		userRepository.save(appUser);
 		return true;
-		
+	}
+	
+	// ユーザーの削除
+	public void delete(String email) {
+		userRepository.deleteByEmail(email);
 	}
 }
