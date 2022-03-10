@@ -34,9 +34,10 @@ public class UserController {
 		return "/login";
 	}
 	
-	@PostMapping("/logout")
-	public String logout() {
-		return "/logout";
+	@GetMapping("/delete")
+	public String logout(Authentication loginUser) {
+		appUserService.delete(loginUser.getName());
+		return "redirect:/logout?register";
 	}
 	
 	@GetMapping("/register")
