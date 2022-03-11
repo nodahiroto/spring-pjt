@@ -5,10 +5,9 @@
 <title>ホーム画面</title>
 </head>
 <body>
+<header>
+  <a th:href="@{/logout}">ログアウト</a>
+</header>
 <h2>ホーム画面</h2>
-<div th:if="${success}">[[${success}]]</div>
-<form th:action="@{/logout}" method="post">
-  <input type="submit" value="ログアウト">
-</form>
 </body>
 </html>
