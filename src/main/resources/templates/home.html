@@ -6,8 +6,17 @@
 </head>
 <body>
 <header>
+  <p>おさいふ管理アプリ</p>
   <a th:href="@{/logout}">ログアウト</a>
 </header>
-<h2>ホーム画面</h2>
+
+<h2>現在の予算</h2>
+<!-- 残高表示(remain) -->
+<form th:action="@{/reset}" method="post">
+  <button>リセット</button>
+</form>
+<a href="/input">入金</a>
+<a href="/output">支出</a>
+<a href="/detail">詳細</a>
 </body>
 </html>
