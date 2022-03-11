@@ -26,18 +26,12 @@ public class UserController {
 		if(loginUser != null) {
 			return "/home";
 		}
-		return "/login";
+		return "/register";
 	}
 	
 	@GetMapping("/login")
 	public String login(@ModelAttribute AppUser appUser) {
 		return "/login";
-	}
-	
-	@GetMapping("/delete")
-	public String logout(Authentication loginUser) {
-		appUserService.delete(loginUser.getName());
-		return "redirect:/logout?register";
 	}
 	
 	@GetMapping("/register")
