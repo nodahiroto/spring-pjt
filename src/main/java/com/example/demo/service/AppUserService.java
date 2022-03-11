@@ -36,8 +36,4 @@ public class AppUserService {
 		return true;
 	}
 	
-	// ユーザーの削除
-	public void delete(String email) {
-		userRepository.deleteByEmail(email);
-	}
 }
