@@ -10,4 +10,6 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 	
 	// 指定のメールアドレスが存在するか
 	boolean existsByEmail(String email);
+	
+	public AppUser deleteByEmail(String email);
 }

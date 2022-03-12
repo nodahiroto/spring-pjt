@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>支出画面</title>
 </head>
 <body>
-
+<form th:action="@{/output}" method="post" th:object="${output}">
+  <label for="outDate">日付：</label>
+  <input type="date" th:field="*{outDate}">
+  <label for="outContent">メモ：</label>
+  <input type="text" th:field="*{outContent}">
+  <label for="outPrice">金額：</label>
+  <input type="text" th:field="*{outPrice}">
+</form>
 </body>
 </html>

@@ -6,14 +6,18 @@
 </head>
 <body>
 	<h2>ユーザー登録画面</h2>
+	<div th:if="${success}">
+	  <h2 th:text="[[${success}]]"></h2>
+	  <a href="/home">ホーム画面へ</a>
+	</div>
 	<div th:if="${message}">
-	  [[${message}]]
+	  <h2 th:text="[[${message}]]"></h2>
 	</div>
 	<form th:action="@{/register}" method="post" th:object="${appUser}">
 		<label for="email">メールアドレス</label>
-		  <input type="email" th:field="*{email}"><br>
+		  <input type="email" th:errorclass="is-invalid" th:field="*{email}"><br>
 		<label for="password">パスワード</label>
-		  <input type="password" th:field="*{password}"><br>
+		  <input type="password" th:errorclass="is-invalid" th:field="*{password}"><br>
 		<button type="submit">登録</button>
 	</form>
 	<a href="/login">ログイン画面はこちら</a>
