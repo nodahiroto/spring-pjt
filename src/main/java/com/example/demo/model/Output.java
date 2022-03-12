@@ -36,6 +36,10 @@ public class Output {
 	@Column(name = "out_content")
 	private String outContent;
 	
+	@Column(name = "out_date")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private String outDate;
+	
 	@Column(name = "created_at")
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDateTime CreatedAt;
