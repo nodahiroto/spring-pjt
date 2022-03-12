@@ -8,6 +8,8 @@
 <header>
   <p>おさいふ管理アプリ</p>
   <a th:href="@{/logout}">ログアウト</a>
+  <div th:if="${success}">[[$success]]</div>
+  <div th:if="${message}">[[$message]]</div>
 </header>
 
 <h2>現在の予算</h2>
