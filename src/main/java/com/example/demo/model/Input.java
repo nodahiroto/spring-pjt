@@ -36,6 +36,10 @@ public class Input {
 	@Column(name = "in_content")
 	private String inContent;
 	
+	@Column(name = "in_date")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private String inDate;
+	
 	@Column(name = "created_at")
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDateTime CreatedAt;
