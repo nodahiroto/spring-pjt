@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.AppUser;
+import com.example.demo.model.Budget;
 import com.example.demo.service.AppUserService;
 
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,9 @@ public class UserController {
 		boolean RegistrationResult = appUserService.RegistrationUser(appUser);
 		
 		if(RegistrationResult) {
+			Budget budget = new Budget();
+			budget.setNowBudget(0);
+			model.addAttribute("budget", budget);
 			redirectAttributes.addFlashAttribute("success", "登録しました。");
 			return "/home";
 		} else {

@@ -15,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+//@NamedQuery(name = "myFindBudget", query = "select sum(n.nowBudget) FROM budgets b")
 @Table(name="budgets")
 public class Budget {
 

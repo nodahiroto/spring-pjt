@@ -15,12 +15,9 @@ public class InputService {
 
 	private final InputRepository inputRepository;
 	
-	public Input payment(Input input) {
-		// 予算に反映
-		
+	public void payment(Input input) {
 		
 		input.setCreatedAt(LocalDateTime.now());
 		inputRepository.save(input);
-		return input;
 	}
 }

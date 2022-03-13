@@ -13,7 +13,7 @@
 </header>
 
 <h2>現在の予算</h2>
-<!-- 残高表示(remain) -->
+<div th:text="${budgetRemain}"></div>
 <form th:action="@{/reset}" method="post">
   <button>リセット</button>
 </form>
