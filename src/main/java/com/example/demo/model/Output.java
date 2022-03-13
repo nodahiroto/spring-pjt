@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -38,7 +39,7 @@ public class Output {
 	
 	@Column(name = "out_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private String outDate;
+	private LocalDate outDate;
 	
 	@Column(name = "created_at")
 	@DateTimeFormat(iso = ISO.DATE)

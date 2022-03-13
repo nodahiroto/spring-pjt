@@ -2,16 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<script src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/today.js}"></script>
 <title>入金画面</title>
 </head>
 <body>
 <form th:action="@{/input}" method="post" th:object="${input}">
   <label for="inDate">日付：</label>
-  <input type="date" th:field="*{inDate}">
+  <input type="date" class="datepicker" id="today" th:field="*{inDate}"><br>
   <label for="inContent">メモ：</label>
-  <input type="text" th:field="*{inContent}">
+  <input type="text" th:field="*{inContent}"><br>
   <label for="inPrice">金額：</label>
-  <input type="text" th:field="*{inPrice}">
+  <input type="text" th:field="*{inPrice}"><br>
+  <input type="submit" value="OK">
 </form>
 </body>
 </html>

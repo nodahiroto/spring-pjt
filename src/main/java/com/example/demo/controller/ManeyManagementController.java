@@ -36,7 +36,7 @@ public class ManeyManagementController {
 		
 		Budget budget = budgetService.countBudget(allInput, allOutput);
 		model.addAttribute("budgetRemain", budget.getNowBudget());
-		return "/redirect:home";
+		return "/home";
 	}
 	
 	@PostMapping("/reset")
@@ -45,19 +45,29 @@ public class ManeyManagementController {
 		// 予算のリセット処理
 	}
 	
+	@GetMapping("/input")
+	public String inputForm(@ModelAttribute Input input) {
+		return "/input";
+	}
+	
 	@PostMapping("/input")
 	public String input(@Validated @ModelAttribute Input input, Model model, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			System.out.println(result);
-			return "/redirect:home";
+			return "/redirect:input";
 		}
 		
 		// 入金処理
 		inputService.payment(input);
 		redirectAttributes.addFlashAttribute("message", "入金しました。");
 		
-		return "/redirect:home";
+		return "/home";
+	}
+	
+	@GetMapping("/output")
+	public String outputForm(@ModelAttribute Output output) {
+		return "/output";
 	}
 	
 	@PostMapping("/output")
@@ -65,13 +75,13 @@ public class ManeyManagementController {
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			System.out.println(result);
-			return "/redirect:home";
+			return "/redirect:output";
 		}
 		
 		// 支出処理
 		outputService.expenditure(output);
 		redirectAttributes.addFlashAttribute("message", "支出しました。");
 
-		return "/redirect:home";
+		return "/home";
 	}
 }

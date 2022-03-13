@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -36,9 +37,10 @@ public class Input {
 	@Column(name = "in_content")
 	private String inContent;
 	
+	@NotNull
 	@Column(name = "in_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private String inDate;
+	private LocalDate inDate;
 	
 	@Column(name = "created_at")
 	@DateTimeFormat(iso = ISO.DATE)
