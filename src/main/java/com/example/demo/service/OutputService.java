@@ -15,13 +15,20 @@ public class OutputService {
 
 	private final OutputRepository outputRepository;
 	
-	public Output expenditure(Output output) {
-		// 予算に反映
-		
-		
-		
+	public void expenditure(Output output) {
+
 		output.setCreatedAt(LocalDateTime.now());
 		outputRepository.save(output);
-		return output;
+
+	}
+	
+	public void update(Long id, Output output) {
+		
+		output.setOutputId(id);
+		output.setOutDate(output.getOutDate());
+		output.setOutContent(output.getOutContent());
+		output.setOutPrice(output.getOutPrice());
+		output.setUpdatedAt(LocalDateTime.now());
+		outputRepository.save(output);
 	}
 }
