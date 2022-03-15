@@ -126,10 +126,10 @@ public class ManeyManagementController {
 	public String inputUpdate(@PathVariable Long id, @ModelAttribute Input input,
 			RedirectAttributes redirectAttributes) {
 		
-		inputRepository.save(input);
+		inputService.update(id, input);
 		redirectAttributes.addFlashAttribute("message", "データを更新しました。");
 		
-		return "/home";
+		return "redirect:/home";
 	}
 	
 	@GetMapping("/input/delete/{id}")
@@ -137,6 +137,32 @@ public class ManeyManagementController {
 		inputRepository.deleteById(id);
 		redirectAttributes.addFlashAttribute("message", "データを削除しました。");
 		
-		return "/home";
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/output/edit/{id}")
+	public String outputEdit(@PathVariable Long id, Model model) {
+		Output output = outputRepository.findById(id).get();
+		model.addAttribute("output", output);
+		
+		return "/output-edit";
+	}
+	
+	@PostMapping("/output/update/{id}")
+	public String outputUpdate(@PathVariable Long id, @ModelAttribute Output output,
+			RedirectAttributes redirectAttributes) {
+		
+		outputService.update(id, output);
+		redirectAttributes.addFlashAttribute("message", "データを更新しました。");
+		
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/output/delete/{id}")
+	public String outputDelete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+		outputRepository.deleteById(id);
+		redirectAttributes.addFlashAttribute("message", "データを削除しました。");
+		
+		return "redirect:/home";
 	}
 }
