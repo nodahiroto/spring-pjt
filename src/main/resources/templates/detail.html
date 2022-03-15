@@ -13,6 +13,7 @@
       <th>メモ</th>
       <th>金額</th>
       <th>投稿日時</th>
+      <th>更新日時</th>
     </tr>
   </thead>
   <tbody>
@@ -20,9 +21,10 @@
       <td>[[${inList.inDate}]]</td>
       <td>[[${inList.inContent}]]</td>
       <td>[[${inList.inPrice}]]</td>
-      <td>[[${inList.createdAt}]]</td>
-      <td><a th:href="@{/input/edit/{id}(id=${inList.id})}">編集</a></td>
-      <td><a th:href="@{/input/delete/{id}(id=${inList.id})}">削除</a></td>
+      <td th:if="inList.CreatedAt">[[${inList.CreatedAt}]]</td>
+      <td th:if="inList.UpdatedAt">[[${inList.UpdatedAt}]]</td>
+      <td><a th:href="@{/input/edit/{id}(id=${inList.inputId})}">編集</a></td>
+      <td><a th:href="@{/input/delete/{id}(id=${inList.inputId})}">削除</a></td>
     </tr>
   </tbody>
 </table>
@@ -36,6 +38,7 @@
       <th>メモ</th>
       <th>金額</th>
       <th>投稿日時</th>
+      <th>更新日時</th>
     </tr>
   </thead>
   <tbody>
@@ -43,9 +46,10 @@
       <td>[[${outList.outDate}]]</td>
       <td>[[${outList.outContent}]]</td>
       <td>[[${outList.outPrice}]]</td>
-      <td>[[${outList.createdAt}]]</td>
-      <td><a th:href="@{/output/edit/{id}(id=${outList.id})}">編集</a></td>
-      <td><a th:href="@{/output/delete/{id}(id=${outList.id})}">削除</a></td>
+      <td th:if="outList.CreatedAt">[[${outList.CreatedAt}]]</td>
+      <td th:if="outList.UpdatedAt">[[${outList.UpdatedAt}]]</td>
+      <td><a th:href="@{/output/edit/{id}(id=${outList.outputId})}">編集</a></td>
+      <td><a th:href="@{/output/delete/{id}(id=${outList.outputId})}">削除</a></td>
     </tr>
   </tbody>
 </table>

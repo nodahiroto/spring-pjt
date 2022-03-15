@@ -7,7 +7,7 @@
 <body>
 <form th:action="@{/input/update/{id}(id=${input.inputId})}" method="post" th:object="${input}">
   <label for="inDate">日付：</label>
-  <input type="date" class="datepicker" id="today" th:field="*{inDate}"><br>
+  <input type="date" th:field="*{inDate}"><br>
   <label for="inContent">メモ：</label>
   <input type="text" th:field="*{inContent}"><br>
   <label for="inPrice">金額：</label>
