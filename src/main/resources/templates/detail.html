@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>詳細画面</title>
 </head>
 <body>
+<p>入金履歴</p>
+<table>
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>メモ</th>
+      <th>金額</th>
+      <th>投稿日時</th>
+      <th>更新日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="inList : ${inputList}">
+      <td>[[${inList.inDate}]]</td>
+      <td>[[${inList.inContent}]]</td>
+      <td>[[${inList.inPrice}]]</td>
+      <td th:if="inList.CreatedAt">[[${inList.CreatedAt}]]</td>
+      <td th:if="inList.UpdatedAt">[[${inList.UpdatedAt}]]</td>
+      <td><a th:href="@{/input/edit/{id}(id=${inList.inputId})}">編集</a></td>
+      <td><a th:href="@{/input/delete/{id}(id=${inList.inputId})}">削除</a></td>
+    </tr>
+  </tbody>
+</table>
+<h4>入金合計：[[${allInput}]]</h4>
 
+<p>支出履歴</p>
+<table>
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>メモ</th>
+      <th>金額</th>
+      <th>投稿日時</th>
+      <th>更新日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="outList : ${outputList}">
+      <td>[[${outList.outDate}]]</td>
+      <td>[[${outList.outContent}]]</td>
+      <td>[[${outList.outPrice}]]</td>
+      <td th:if="outList.CreatedAt">[[${outList.CreatedAt}]]</td>
+      <td th:if="outList.UpdatedAt">[[${outList.UpdatedAt}]]</td>
+      <td><a th:href="@{/output/edit/{id}(id=${outList.outputId})}">編集</a></td>
+      <td><a th:href="@{/output/delete/{id}(id=${outList.outputId})}">削除</a></td>
+    </tr>
+  </tbody>
+</table>
+<h4>入金合計：[[${allOutput}]]</h4>
+<a href="/home">ホーム画面に戻る</a>
 </body>
 </html>

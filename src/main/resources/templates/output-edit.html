@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>編集画面</title>
+</head>
+<body>
+<form th:action="@{/output/update/{id}(id=${output.outputId})}" method="post" th:object="${output}">
+  <label for="outDate">日付：</label>
+  <input type="date" th:field="*{outDate}"><br>
+  <label for="outContent">メモ：</label>
+  <input type="text" th:field="*{outContent}"><br>
+  <label for="outPrice">金額：</label>
+  <input type="text" th:field="*{outPrice}"><br>
+  <input type="submit" value="保存">
+</form>
+</body>
+</html>
