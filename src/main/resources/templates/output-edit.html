@@ -5,14 +5,24 @@
 <title>編集画面</title>
 </head>
 <body>
+<h4>支出編集画面</h4>
 <form th:action="@{/output/update/{id}(id=${output.outputId})}" method="post" th:object="${output}">
-  <label for="outDate">日付：</label>
-  <input type="date" th:field="*{outDate}"><br>
-  <label for="outContent">メモ：</label>
-  <input type="text" th:field="*{outContent}"><br>
-  <label for="outPrice">金額：</label>
-  <input type="text" th:field="*{outPrice}"><br>
+  <div>
+    <label for="outDate">日付：</label>
+    <input type="date" th:errorclass="is-invalid" th:field="*{outDate}">
+    <div class="invalid-feedback" th:errors="*{outDate}"></div>
+  </div>
+  <div>
+    <label for="outContent">メモ：</label>
+    <input type="text" th:field="*{outContent}">
+  </div>
+  <div>
+    <label for="outPrice">金額：</label>
+    <input type="text" th:errorclass="is-invalid" th:field="*{outPrice}">
+    <div class="invalid-feedback" th:errors="*{outPrice}"></div>
+  </div>
   <input type="submit" value="保存">
+  <a href="/detail">詳細画面に戻る</a>
 </form>
 </body>
 </html>
