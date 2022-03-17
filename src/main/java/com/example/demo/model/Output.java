@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -31,6 +33,8 @@ public class Output {
 	
 	@NotNull
 	@Positive
+	@Min(1)
+	@Max(1000000)
 	@Column(name = "out_price")
 	private int outPrice;
 	

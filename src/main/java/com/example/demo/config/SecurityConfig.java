@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// ログアウトページの設定
 		.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login")
+		.logoutSuccessUrl("/login?logout")
 		.and()
 		.rememberMe();
 	}

@@ -6,17 +6,27 @@
 </head>
 <body>
 <h2>ログイン</h2>
-<form th:action="@{/login}" method="post">
   <div th:if="${param.error}">
     ログインに失敗しました。
   </div>
   <div th:if="${param.logout}">
     ログアウトしました。
   </div>
-  <label for="email">メールアドレス</label>
-  <input type="text" id="email" name="email"><br>
-  <label for="password">パスワード</label>
-  <input type="password" id="password" name="password"><br>
+<form th:action="@{/login}" method="post">
+  <div>
+    <label for="email">メールアドレス</label>
+    <input type="text" id="email" name="email">
+  </div>
+  <div>
+    <label for="password">パスワード</label>
+    <input type="password" id="password" name="password">
+  </div>
+  <div>
+    <input type="checkbox" id="remember-me" name="remember-me">
+    <label class="form-check-label" for="remember-me">
+      ログインしたままにする
+    </label>
+  </div>
   <button type="submit">ログイン</button>
 </form>
 <a href="/register">ユーザー登録はこちら</a>

@@ -59,18 +59,18 @@ public class ManeyManagementController {
 	}
 	
 	@PostMapping("/input")
-	public String input(@Validated @ModelAttribute Input input, Model model, BindingResult result,
+	public String input(@Validated @ModelAttribute Input input, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			System.out.println(result);
-			return "/redirect:input";
+			
+			return "/input";
 		}
 		
 		// 入金処理
 		inputService.payment(input);
 		redirectAttributes.addFlashAttribute("message", "入金しました。");
 		
-		return "/home";
+		return "redirect:/home";
 	}
 	
 	@GetMapping("/output")
@@ -83,15 +83,15 @@ public class ManeyManagementController {
 	public String output(@Validated @ModelAttribute Output output, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			System.out.println(result);
-			return "/redirect:output";
+
+			return "/output";
 		}
 		
 		// 支出処理
 		outputService.expenditure(output);
 		redirectAttributes.addFlashAttribute("message", "支出しました。");
 
-		return "/home";
+		return "redirect:/home";
 	}
 	
 	@GetMapping("/detail")
@@ -123,10 +123,14 @@ public class ManeyManagementController {
 	}
 	
 	@PostMapping("/input/update/{id}")
-	public String inputUpdate(@PathVariable Long id, @ModelAttribute Input input,
+	public String inputUpdate(@Validated @ModelAttribute Input input, BindingResult result,
 			RedirectAttributes redirectAttributes) {
+		if(result.hasErrors()) {
+
+			return "/input-edit";
+		}
 		
-		inputService.update(id, input);
+		inputService.update(input);
 		redirectAttributes.addFlashAttribute("message", "データを更新しました。");
 		
 		return "redirect:/home";
@@ -149,10 +153,14 @@ public class ManeyManagementController {
 	}
 	
 	@PostMapping("/output/update/{id}")
-	public String outputUpdate(@PathVariable Long id, @ModelAttribute Output output,
-			RedirectAttributes redirectAttributes) {
+	public String outputUpdate(@Validated @ModelAttribute Output output,
+			BindingResult result, RedirectAttributes redirectAttributes) {
+		if(result.hasErrors()) {
+			
+			return "/output-edit";
+		}
 		
-		outputService.update(id, output);
+		outputService.update(output);
 		redirectAttributes.addFlashAttribute("message", "データを更新しました。");
 		
 		return "redirect:/home";

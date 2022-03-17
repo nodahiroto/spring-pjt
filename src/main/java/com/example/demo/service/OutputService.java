@@ -22,12 +22,8 @@ public class OutputService {
 
 	}
 	
-	public void update(Long id, Output output) {
+	public void update(Output output) {
 		
-		output.setOutputId(id);
-		output.setOutDate(output.getOutDate());
-		output.setOutContent(output.getOutContent());
-		output.setOutPrice(output.getOutPrice());
 		output.setUpdatedAt(LocalDateTime.now());
 		outputRepository.save(output);
 	}

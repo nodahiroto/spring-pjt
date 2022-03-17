@@ -21,12 +21,8 @@ public class InputService {
 		inputRepository.save(input);
 	}
 	
-	public void update(Long id, Input input) {
+	public void update(Input input) {
 		
-		input.setInputId(id);
-		input.setInDate(input.getInDate());
-		input.setInContent(input.getInContent());
-		input.setInPrice(input.getInPrice());
 		input.setUpdatedAt(LocalDateTime.now());
 		inputRepository.save(input);
 	}

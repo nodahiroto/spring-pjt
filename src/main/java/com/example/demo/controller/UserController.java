@@ -25,7 +25,7 @@ public class UserController {
 	@GetMapping("/")
 	public String first (@ModelAttribute AppUser appUser, Authentication loginUser) {
 		if(loginUser != null) {
-			return "/home";
+			return "redirect:/home";
 		}
 		return "/register";
 	}
@@ -44,8 +44,8 @@ public class UserController {
 	public String save(@Validated @ModelAttribute AppUser appUser, Model model, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
-			model.addAttribute("message", result);
-			return "redirect:/register";
+			
+			return "/register";
 		}
 		
 		boolean RegistrationResult = appUserService.RegistrationUser(appUser);
@@ -58,7 +58,7 @@ public class UserController {
 			return "/home";
 		} else {
 			model.addAttribute("message", "登録に失敗しました。");
-			return "redirect:/register";
+			return "/register";
 		}
 	}
 }
