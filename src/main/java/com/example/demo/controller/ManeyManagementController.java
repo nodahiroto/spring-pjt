@@ -123,15 +123,14 @@ public class ManeyManagementController {
 	}
 	
 	@PostMapping("/input/update/{id}")
-	public String inputUpdate(@Validated @PathVariable Long id, @ModelAttribute Input input,
-			BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+	public String inputUpdate(@Validated @ModelAttribute Input input, BindingResult result,
+			RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
 
-			model.addAttribute("input", input);
-			return "redirect:/input-edit/" + id;
+			return "/input-edit";
 		}
 		
-		inputService.update(id, input);
+		inputService.update(input);
 		redirectAttributes.addFlashAttribute("message", "データを更新しました。");
 		
 		return "redirect:/home";
@@ -154,14 +153,14 @@ public class ManeyManagementController {
 	}
 	
 	@PostMapping("/output/update/{id}")
-	public String outputUpdate(@Validated @PathVariable Long id, @ModelAttribute Output output,
+	public String outputUpdate(@Validated @ModelAttribute Output output,
 			BindingResult result, RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
 			
 			return "/output-edit";
 		}
 		
-		outputService.update(id, output);
+		outputService.update(output);
 		redirectAttributes.addFlashAttribute("message", "データを更新しました。");
 		
 		return "redirect:/home";

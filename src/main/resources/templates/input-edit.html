@@ -6,7 +6,8 @@
 </head>
 <body>
 <h4>入金編集画面</h4>
-<form th:action="@{/input/update/{id}(id=${input.inputId})}" method="post" th:object="${input}">
+<form th:action="@{/input/update/{id}(id=${input.inputId})}" method="post"
+      th:object="${input}" novalidate>
   <div>
     <label for="inDate">日付：</label>
     <input type="date" th:errorclass="is-invalid" th:field="*{inDate}">
@@ -21,7 +22,7 @@
     <input type="text" th:errorclass="is-invalid" th:field="*{inPrice}"> 
     <div class="invalid-feedback" th:errors="*{inPrice}"></div>
   </div>
-  <input type="submit" value="保存">
+  <input type="submit" value="保存"><br>
   <a href="/detail">詳細画面に戻る</a>
 </form>
 </body>
