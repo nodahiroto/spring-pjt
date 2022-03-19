@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -23,6 +24,11 @@ public class AppUser {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id", nullable = false)
 	private Long id;
+	
+	@NotNull
+	@Size(min = 1, max = 15)
+	@Column(name = "user_name", nullable = false)
+	private String username;
 	
 	@NotBlank
 	@Email
