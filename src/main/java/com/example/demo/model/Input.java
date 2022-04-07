@@ -53,5 +53,6 @@ public class Input {
 	@Column(name = "update_at")
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDateTime UpdatedAt;
+
 	
 }

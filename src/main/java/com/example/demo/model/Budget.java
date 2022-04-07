@@ -28,4 +28,5 @@ public class Budget {
 	@Positive
 	@Column(name = "now_budget")
 	private int nowBudget;
+
 }

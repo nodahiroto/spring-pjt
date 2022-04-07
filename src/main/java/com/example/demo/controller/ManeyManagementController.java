@@ -2,7 +2,8 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,9 +38,9 @@ public class ManeyManagementController {
 	private final OutputRepository outputRepository;
 	
 	@GetMapping("/home")
-	public String home(Authentication loginUser, Model model) {
-		
-		AppUser appuser = appUserRepository.findByUsername(loginUser.getName());
+	public String home(@AuthenticationPrincipal User user, Model model) {
+
+		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
 		
 		// 入金の合計
 		int allInput = inputRepository.getAllInput();
@@ -48,29 +49,30 @@ public class ManeyManagementController {
 		
 		// 現在の予算
 		Budget budget = budgetService.countBudget(allInput, allOutput);
-		model.addAttribute("appuser", appuser);
+		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		model.addAttribute("budgetRemain", budget.getNowBudget());
 		
 		return "/home";
 	}
 	
 	@PostMapping("/reset")
-	public String reset(Authentication loginUser) {
+	public String reset(@AuthenticationPrincipal User user) {
 		// 予算のリセット処理
 		
 		return "redirect:/home";
 	}
 	
 	@GetMapping("/input")
-	public String inputForm(@ModelAttribute Input input, Authentication loginUser, Model model) {
+	public String inputForm(@ModelAttribute Input input, @AuthenticationPrincipal User user, Model model) {
 		
-		model.addAttribute("appuser", loginUser.getName());
+		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
+		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		return "/input";
 	}
 	
 	@PostMapping("/input")
 	public String input(@Validated @ModelAttribute Input input, BindingResult result,
-			Authentication loginUser, RedirectAttributes redirectAttributes) {
+			@AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			
 			return "/input";
@@ -84,15 +86,16 @@ public class ManeyManagementController {
 	}
 	
 	@GetMapping("/output")
-	public String outputForm(@ModelAttribute Output output, Authentication loginUser, Model model) {
+	public String outputForm(@ModelAttribute Output output, @AuthenticationPrincipal User user, Model model) {
 		
-		model.addAttribute("appuser", loginUser.getName());
+		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
+		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		return "/output";
 	}
 	
 	@PostMapping("/output")
 	public String output(@Validated @ModelAttribute Output output, BindingResult result,
-			Authentication loginUser, RedirectAttributes redirectAttributes) {
+			@AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 
 			return "/output";
@@ -106,7 +109,10 @@ public class ManeyManagementController {
 	}
 	
 	@GetMapping("/detail")
-	public String detailList(Authentication loginUser, Model model) {
+	public String detailList(@AuthenticationPrincipal User user, Model model) {
+		
+		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
+		
 		// 入金履歴の取得
 		List<Input> inputList = inputRepository.findAll();
 		// 支出履歴の取得
@@ -117,7 +123,7 @@ public class ManeyManagementController {
 		// 支出の合計を取得
 		int allOutput = outputRepository.getAllOutput();
 		
-		model.addAttribute("appuser", appUserRepository.findByUsername(loginUser.getName()));
+		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		model.addAttribute("inputList", inputList);
 		model.addAttribute("outputList", outputList);
 		model.addAttribute("allInput", allInput);
@@ -127,17 +133,20 @@ public class ManeyManagementController {
 	}
 	
 	@GetMapping("/input/edit/{id}")
-	public String inputEdit(@PathVariable Long id, Authentication loginUser, Model model) {
+	public String inputEdit(@PathVariable Long id, @AuthenticationPrincipal User user, Model model) {
+		
+		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
+		
 		Input input = inputRepository.findById(id).get();
 		model.addAttribute("input", input);
-		model.addAttribute("appuser", appUserRepository.findByUsername(loginUser.getName()));
+		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		
 		return "/input-edit";
 	}
 	
 	@PostMapping("/input/update/{id}")
 	public String inputUpdate(@Validated @ModelAttribute Input input, BindingResult result,
-			Authentication loginUser, RedirectAttributes redirectAttributes) {
+			@AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
 
 			return "/input-edit";
@@ -158,17 +167,20 @@ public class ManeyManagementController {
 	}
 	
 	@GetMapping("/output/edit/{id}")
-	public String outputEdit(@PathVariable Long id, Authentication loginUser, Model model) {
+	public String outputEdit(@PathVariable Long id, @AuthenticationPrincipal User user, Model model) {
+		
+		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
+		
 		Output output = outputRepository.findById(id).get();
 		model.addAttribute("output", output);
-		model.addAttribute("appuser", appUserRepository.findByUsername(loginUser.getName()));
+		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		
 		return "/output-edit";
 	}
 	
 	@PostMapping("/output/update/{id}")
 	public String outputUpdate(@Validated @ModelAttribute Output output, BindingResult result,
-			Authentication loginUser, RedirectAttributes redirectAttributes) {
+			@AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
 			
 			return "/output-edit";

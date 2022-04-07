@@ -9,7 +9,7 @@
 <body>
 <h4>支出画面</h4>
 <form th:action="@{/output}" method="post" th:object="${output}">
-    <input type="hidden" name="username" th:value="${appuser.username}">
+    <!-- <input type="hidden" name="userId" th:value="${appuser.userId}"> -->
   <div>
     <label for="outDate">日付：</label>
     <input type="date" class="datepicker" id="today" th:errorclass="is-invalid" th:field="*{outDate}">
