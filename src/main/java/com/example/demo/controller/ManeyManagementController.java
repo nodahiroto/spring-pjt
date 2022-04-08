@@ -52,6 +52,9 @@ public class ManeyManagementController {
 		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		model.addAttribute("budgetRemain", budget.getNowBudget());
 		
+		// 今日の日付を取得
+		model.addAttribute("today", budgetService.getToday());
+		
 		return "/home";
 	}
 	
@@ -128,6 +131,9 @@ public class ManeyManagementController {
 		model.addAttribute("outputList", outputList);
 		model.addAttribute("allInput", allInput);
 		model.addAttribute("allOutput", allOutput);
+		
+		// 今日の日付を取得
+		model.addAttribute("today", budgetService.getToday());
 		
 		return "/detail";
 	}

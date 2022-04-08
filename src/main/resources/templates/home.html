@@ -11,8 +11,9 @@
   <div th:if="${success}">[[${success}]]</div>
   <div th:if="${message}">[[${message}]]</div>
 </header>
+<h2 th:text="${today}"></h2>
 
-<h2>現在の予算</h2>
+<h3>現在の予算</h3>
 <div th:text="${budgetRemain}"></div>
 <form th:action="@{/reset}" method="post">
   <!-- <input type="hidden" name="userId" th:value="${appuser.userId}"> -->

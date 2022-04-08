@@ -32,7 +32,7 @@ public class AppUserService {
 		}
 		
 		// データベースに反映
-		userRepository.saveAndFlush(appUser);
+		userRepository.save(appUser);
 		return true;
 	}
 	
