@@ -22,7 +22,7 @@ public class AppUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id", nullable = false)
-	private Long id;
+	private Long userId;
 	
 	@NotBlank
 	@Email
@@ -35,4 +35,5 @@ public class AppUser {
 	
 	private boolean admin;
 	private String role;
+	
 }

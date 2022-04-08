@@ -9,6 +9,7 @@
 <body>
 <h4>入金画面</h4>
 <form th:action="@{/input}" method="post" th:object="${input}" novalidate>
+    <!-- <input type="hidden" name="userId" th:value="${appuser.userId}"> -->
   <div>
     <label for="inDate">日付：</label>
     <input type="date" class="datepicker" th:errorclass="is-invalid" id="today" th:field="*{inDate}">
