@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Budget;
 import com.example.demo.repository.BudgetRepository;
+import com.example.demo.repository.InputRepository;
+import com.example.demo.repository.OutputRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,14 +16,31 @@ import lombok.RequiredArgsConstructor;
 public class BudgetSevice {
 
 	private final BudgetRepository budgetRepository;
+	private final InputRepository inputRepository;
+	private final OutputRepository outputRepository;
 	
-	public Budget countBudget(int allInput, int allOutput) {
+	public Budget countBudget() {
+		// 入金の合計
+		int allInput = inputRepository.getAllInput();
+		// 支出の合計
+		int allOutput = outputRepository.getAllOutput();
+		
 		int totalAmmount = allInput - allOutput;
 		Budget budget = new Budget();
 		budget.setNowBudget(totalAmmount);
 		budgetRepository.save(budget);
 		
 		return budget;
+	}
+	
+	public int countMonthBudget() {
+		// 入金の合計
+		int totalMonthInput = inputRepository.getTotalMonthInput();
+		// 支出の合計
+		int totoalMonthOutput = outputRepository.getTotalMonthOutput();
+		
+		int totalAmmountMonth = totalMonthInput - totoalMonthOutput;
+		return totalAmmountMonth;
 	}
 	
 	public String getToday() {
@@ -37,5 +56,12 @@ public class BudgetSevice {
 		
 		String todaysDate = year + "年" + month + "月" + day + "日" + "(" + week_name[week] + ")";
 		return todaysDate;
+	}
+	
+	public int getMonth() {
+		Calendar calendar = Calendar.getInstance();
+		int month = calendar.get(Calendar.MONTH) + 1;
+		
+		return month;
 	}
 }

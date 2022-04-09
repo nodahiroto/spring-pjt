@@ -26,4 +26,5 @@ public class InputService {
 		input.setUpdatedAt(LocalDateTime.now());
 		inputRepository.save(input);
 	}
+
 }
