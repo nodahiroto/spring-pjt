@@ -27,4 +27,5 @@ public class OutputService {
 		output.setUpdatedAt(LocalDateTime.now());
 		outputRepository.save(output);
 	}
+	
 }

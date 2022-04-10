@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.example.demo.model.Output;
 import com.example.demo.model.beans.OutputMonth;
@@ -31,9 +32,17 @@ public interface OutputRepository extends JpaRepository<Output, Long> {
 		
 		// 特定の月のデータ一覧を取得
 		@Query(value = "SELECT * FROM many_outputs WHERE DATE_FORMAT(out_date, '%m')=:month", nativeQuery = true)
-		public List<Object[]> getMonthOutput();
+		public List<Object[]> getMonthOutput(@Param("month") int month);
+		
+		default List<OutputMonth> findMonthOutput(int month) {
+			return getMonthOutput(month).stream().map(OutputMonth::new).collect(Collectors.toList());
+		}
 		
 		// 現在の月の合計金額
 		@Query(value = "SELECT SUM(out_price) FROM many_outputs WHERE MONTH(out_date) = MONTH(CURRENT_DATE())", nativeQuery = true)
-		public int getTotalMonthOutput();
+		public int getTotalNowMonthOutput();
+		
+		// 特定の月の合計金額
+		@Query(value = "SELECT SUM(out_price) FROM many_outputs WHERE MONTH(out_date) = :month", nativeQuery = true)
+		public int getTotalMonthOutput(@Param("month") int month);
 }

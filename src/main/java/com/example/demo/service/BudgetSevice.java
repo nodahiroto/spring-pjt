@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ public class BudgetSevice {
 	private final InputRepository inputRepository;
 	private final OutputRepository outputRepository;
 	
+	// 全体の計算
 	public Budget countBudget() {
 		// 入金の合計
 		int allInput = inputRepository.getAllInput();
@@ -33,13 +36,25 @@ public class BudgetSevice {
 		return budget;
 	}
 	
-	public int countMonthBudget() {
+	// 今月の計算
+	public int countNowMonthBudget() {
 		// 入金の合計
-		int totalMonthInput = inputRepository.getTotalMonthInput();
+		int totalNowMonthInput = inputRepository.getTotalNowMonthInput();
 		// 支出の合計
-		int totoalMonthOutput = outputRepository.getTotalMonthOutput();
+		int totoalNowMonthOutput = outputRepository.getTotalNowMonthOutput();
 		
-		int totalAmmountMonth = totalMonthInput - totoalMonthOutput;
+		int totalNowAmmountMonth = totalNowMonthInput - totoalNowMonthOutput;
+		return totalNowAmmountMonth;
+	}
+	
+	// 特定の月の計算
+	public int countMonthBudget(int number) {
+		// 入金の合計
+		int totalMonthInput = inputRepository.getTotalMonthInput(number);
+		// 支出の合計
+		int totalMonthOutput = outputRepository.getTotalMonthOutput(number);
+		
+		int totalAmmountMonth = totalMonthInput - totalMonthOutput;
 		return totalAmmountMonth;
 	}
 	
@@ -63,5 +78,15 @@ public class BudgetSevice {
 		int month = calendar.get(Calendar.MONTH) + 1;
 		
 		return month;
+	}
+	
+	public boolean checkMonth(int number) {
+		String srtNum = String.valueOf(number);
+		
+		Pattern pattern = Pattern.compile("^[0-1]|[1-9]+$");
+		Matcher matcher = pattern.matcher(srtNum);
+		
+		boolean result = matcher.matches();
+		return result;
 	}
 }

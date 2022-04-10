@@ -6,6 +6,12 @@
 </head>
 <body>
 <h2 th:text="${today}"></h2>
+<div th:text="${errorMonth}"></div>
+<form th:action="@{/month}" method="get">
+  <label for="number">月別の詳細を見る：</label>
+  <input type="text" name="number">月
+  <input type="submit" value="検索">
+</form>
 <p>入金履歴</p>
 <table>
   <thead>

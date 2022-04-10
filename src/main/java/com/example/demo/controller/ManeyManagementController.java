@@ -52,14 +52,14 @@ public class ManeyManagementController {
 		
 		// 今月の入金合計額
 		model.addAttribute("nowMonthInput", inputRepository.findNowMonthInput());
-		model.addAttribute("totalMonthInput", inputRepository.getTotalMonthInput());
+		model.addAttribute("totalNowMonthInput", inputRepository.getTotalNowMonthInput());
 		
 		// 今月の支出金額合計
 		model.addAttribute("nowMonthOutput", outputRepository.findNowMonthOutput());
-		model.addAttribute("totalMonthOutput", outputRepository.getTotalMonthOutput());
+		model.addAttribute("totalNowMonthOutput", outputRepository.getTotalNowMonthOutput());
 		
 		// 今月の予算
-		model.addAttribute("totalAmmountMonth", budgetService.countMonthBudget());
+		model.addAttribute("totalNowAmmountMonth", budgetService.countNowMonthBudget());
 		
 		return "/home";
 	}
