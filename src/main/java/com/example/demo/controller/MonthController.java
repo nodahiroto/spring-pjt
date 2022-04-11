@@ -22,7 +22,8 @@ public class MonthController {
 	private final BudgetSevice budgetService;
 	
 	@GetMapping("/month")
-	public String showMonth(@RequestParam("number") int number, @AuthenticationPrincipal User user, Model model) {
+	public String showMonth(@RequestParam("number") int number,
+			@AuthenticationPrincipal User user, Model model) throws Exception {
 
 		try {
 			boolean result = budgetService.checkMonth(number);
@@ -31,19 +32,19 @@ public class MonthController {
 				model.addAttribute("monthOutput", outputRepository.findMonthOutput(number));
 				
 			} else {
-				model.addAttribute("errorMonth", "1~12までの数値を入力してください。");
-				return "redirect:/detail";
+				model.addAttribute("errorMonth", "1~12までの数値を入力してください。データがありません。");
+				return "/detail";
 			}
 		} catch (Exception e) {
 			model.addAttribute("errorMonth", "不正な値です");
-			return "redirect:/detail";
+			return "/detail";
 		}
 		
 		try {
 			model.addAttribute("TotalMonthInput", inputRepository.getTotalMonthInput(number));
 			model.addAttribute("TotalMonthOutput", outputRepository.getTotalMonthOutput(number));
 			model.addAttribute("totalAmmountMonth", "残高：" + budgetService.countMonthBudget(number));
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			model.addAttribute("nullMonth", "データがありません。");
 		}
 		

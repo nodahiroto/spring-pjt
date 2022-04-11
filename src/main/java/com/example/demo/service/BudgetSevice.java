@@ -80,10 +80,11 @@ public class BudgetSevice {
 		return month;
 	}
 	
+	// 自作バリデーション(1~12の数字かチェック)
 	public boolean checkMonth(int number) {
 		String srtNum = String.valueOf(number);
 		
-		Pattern pattern = Pattern.compile("^[0-1]|[1-9]+$");
+		Pattern pattern = Pattern.compile("^[1-9]|[1][0-2]+$");
 		Matcher matcher = pattern.matcher(srtNum);
 		
 		boolean result = matcher.matches();
