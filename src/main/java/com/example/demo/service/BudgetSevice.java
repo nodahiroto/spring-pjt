@@ -1,11 +1,15 @@
 package com.example.demo.service;
 
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Budget;
 import com.example.demo.repository.BudgetRepository;
+import com.example.demo.repository.InputRepository;
+import com.example.demo.repository.OutputRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,14 +18,44 @@ import lombok.RequiredArgsConstructor;
 public class BudgetSevice {
 
 	private final BudgetRepository budgetRepository;
+	private final InputRepository inputRepository;
+	private final OutputRepository outputRepository;
 	
-	public Budget countBudget(int allInput, int allOutput) {
+	// 全体の計算
+	public Budget countBudget() {
+		// 入金の合計
+		int allInput = inputRepository.getAllInput();
+		// 支出の合計
+		int allOutput = outputRepository.getAllOutput();
+		
 		int totalAmmount = allInput - allOutput;
 		Budget budget = new Budget();
 		budget.setNowBudget(totalAmmount);
 		budgetRepository.save(budget);
 		
 		return budget;
+	}
+	
+	// 今月の計算
+	public int countNowMonthBudget() {
+		// 入金の合計
+		int totalNowMonthInput = inputRepository.getTotalNowMonthInput();
+		// 支出の合計
+		int totoalNowMonthOutput = outputRepository.getTotalNowMonthOutput();
+		
+		int totalNowAmmountMonth = totalNowMonthInput - totoalNowMonthOutput;
+		return totalNowAmmountMonth;
+	}
+	
+	// 特定の月の計算
+	public int countMonthBudget(int number) {
+		// 入金の合計
+		int totalMonthInput = inputRepository.getTotalMonthInput(number);
+		// 支出の合計
+		int totalMonthOutput = outputRepository.getTotalMonthOutput(number);
+		
+		int totalAmmountMonth = totalMonthInput - totalMonthOutput;
+		return totalAmmountMonth;
 	}
 	
 	public String getToday() {
@@ -37,5 +71,23 @@ public class BudgetSevice {
 		
 		String todaysDate = year + "年" + month + "月" + day + "日" + "(" + week_name[week] + ")";
 		return todaysDate;
+	}
+	
+	public int getMonth() {
+		Calendar calendar = Calendar.getInstance();
+		int month = calendar.get(Calendar.MONTH) + 1;
+		
+		return month;
+	}
+	
+	// 自作バリデーション(1~12の数字かチェック)
+	public boolean checkMonth(int number) {
+		String srtNum = String.valueOf(number);
+		
+		Pattern pattern = Pattern.compile("^[1-9]|[1][0-2]+$");
+		Matcher matcher = pattern.matcher(srtNum);
+		
+		boolean result = matcher.matches();
+		return result;
 	}
 }

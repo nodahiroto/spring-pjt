@@ -41,19 +41,25 @@ public class ManeyManagementController {
 	public String home(@AuthenticationPrincipal User user, Model model) {
 
 		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
-		
-		// 入金の合計
-		int allInput = inputRepository.getAllInput();
-		// 支出の合計
-		int allOutput = outputRepository.getAllOutput();
-		
+
 		// 現在の予算
-		Budget budget = budgetService.countBudget(allInput, allOutput);
+		Budget budget = budgetService.countBudget();
 		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		model.addAttribute("budgetRemain", budget.getNowBudget());
 		
 		// 今日の日付を取得
 		model.addAttribute("today", budgetService.getToday());
+		
+		// 今月の入金合計額
+		model.addAttribute("nowMonthInput", inputRepository.findNowMonthInput());
+		model.addAttribute("totalNowMonthInput", inputRepository.getTotalNowMonthInput());
+		
+		// 今月の支出金額合計
+		model.addAttribute("nowMonthOutput", outputRepository.findNowMonthOutput());
+		model.addAttribute("totalNowMonthOutput", outputRepository.getTotalNowMonthOutput());
+		
+		// 今月の予算
+		model.addAttribute("totalNowAmmountMonth", budgetService.countNowMonthBudget());
 		
 		return "/home";
 	}

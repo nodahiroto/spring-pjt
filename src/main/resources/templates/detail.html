@@ -6,6 +6,12 @@
 </head>
 <body>
 <h2 th:text="${today}"></h2>
+<div th:text="${errorMonth}"></div>
+<form th:action="@{/month}" method="get">
+  <label for="number">月別の詳細を見る：</label>
+  <input type="text" name="number" required>月
+  <input type="submit" value="検索">
+</form>
 <p>入金履歴</p>
 <table>
   <thead>
@@ -54,7 +60,7 @@
     </tr>
   </tbody>
 </table>
-<h4>入金合計：[[${allOutput}]]</h4>
+<h4>支出合計：[[${allOutput}]]</h4>
 <a href="/home">ホーム画面に戻る</a>
 </body>
 </html>

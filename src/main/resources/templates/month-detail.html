@@ -2,31 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>ホーム画面</title>
+<title>月別詳細画面</title>
 </head>
 <body>
-<header>
-  <p>おさいふ管理アプリ</p>
-  <a th:href="@{/logout}">ログアウト</a>
-  <div th:if="${success}">[[${success}]]</div>
-  <div th:if="${message}">[[${message}]]</div>
-</header>
 <h2 th:text="${today}"></h2>
-
-<h3>現在の予算</h3>
-<div th:text="${budgetRemain}"></div>
-<form th:action="@{/reset}" method="post">
-  <!-- <input type="hidden" name="userId" th:value="${appuser.userId}"> -->
-  <button>リセット</button>
-</form>
-<a href="/input">入金</a>
-<a href="/output">支出</a>
-<a href="/detail">詳細</a>
-
-<h3>今月の予算</h3>
-<div th:text="${totalNowAmmountMonth}"></div>
-
-<p>今月の入金履歴</p>
+<h3 th:text="${number}"></h3>
+<div th:text="${nullMonth}"></div>
+<div th:text="${totalAmmountMonth}"></div>
+<p>入金履歴</p>
 <table>
   <thead>
     <tr>
@@ -38,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr th:each="input : ${nowMonthInput}">
+    <tr th:each="input : ${monthInput}">
       <td>[[${input.inDate}]]</td>
       <td>[[${input.inContent}]]</td>
       <td>[[${input.inPrice}]]</td>
@@ -49,9 +32,9 @@
     </tr>
   </tbody>
 </table>
-<h4>入金合計：[[${totalNowMonthInput}]]</h4>
+<h4>入金合計：[[${TotalMonthInput}]]</h4>
 
-<p>今月の支出履歴</p>
+<p>支出履歴</p>
 <table>
   <thead>
     <tr>
@@ -63,7 +46,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr th:each="output : ${nowMonthOutput}">
+    <tr th:each="output : ${monthOutput}">
       <td>[[${output.outDate}]]</td>
       <td>[[${output.outContent}]]</td>
       <td>[[${output.outPrice}]]</td>
@@ -74,6 +57,7 @@
     </tr>
   </tbody>
 </table>
-<h4>支出合計：[[${totalNowMonthOutput}]]</h4>
+<h4>支出合計：[[${TotalMonthOutput}]]</h4>
+<a href="/detail">詳細画面に戻る</a>
 </body>
 </html>
