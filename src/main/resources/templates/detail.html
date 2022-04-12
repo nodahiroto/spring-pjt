@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <title>詳細画面</title>
 </head>
 <body>
@@ -62,5 +63,9 @@
 </table>
 <h4>支出合計：[[${allOutput}]]</h4>
 <a href="/home">ホーム画面に戻る</a>
+<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+    <canvas id="myChart"></canvas>
+</div>
+<script type="text/javascript" th:src="@{/js/line-chart.js}"></script>
 </body>
 </html>

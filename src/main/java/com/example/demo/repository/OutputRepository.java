@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.demo.model.Output;
+import com.example.demo.model.beans.ByMonth;
 import com.example.demo.model.beans.OutputMonth;
 
 public interface OutputRepository extends JpaRepository<Output, Long> {
@@ -20,6 +21,10 @@ public interface OutputRepository extends JpaRepository<Output, Long> {
 		@Query(value = "SELECT DATE_FORMAT(out_date, '%Y%m') as YM, SUM(out_price) "
 				+ "FROM many_outputs GROUP BY DATE_FORMAT(out_date, '%Y%m')", nativeQuery = true)
 		public List<Object[]> getSumMonthOutput();
+		
+		default List<ByMonth> findSumMonthOutput() {
+			return getSumMonthOutput().stream().map(ByMonth::new).collect(Collectors.toList());
+		}
 		
 		// 現在月のデータ一覧を取得
 		@Query(value = "SELECT * FROM many_outputs WHERE MONTH(out_date) = MONTH(CURRENT_DATE()) "

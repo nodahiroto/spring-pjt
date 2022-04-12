@@ -138,6 +138,9 @@ public class ManeyManagementController {
 		model.addAttribute("allInput", allInput);
 		model.addAttribute("allOutput", allOutput);
 		
+		// 月別の支出金額を取得
+		model.addAttribute("sumMonth", outputRepository.findSumMonthOutput());
+		
 		// 今日の日付を取得
 		model.addAttribute("today", budgetService.getToday());
 		
