@@ -18,6 +18,7 @@ import com.example.demo.model.AppUser;
 import com.example.demo.model.Budget;
 import com.example.demo.model.Input;
 import com.example.demo.model.Output;
+import com.example.demo.model.beans.TotalMonth;
 import com.example.demo.repository.AppUserRepository;
 import com.example.demo.repository.InputRepository;
 import com.example.demo.repository.OutputRepository;
@@ -139,7 +140,19 @@ public class ManeyManagementController {
 		model.addAttribute("allOutput", allOutput);
 		
 		// 月別の支出金額を取得
-		model.addAttribute("sumMonth", outputRepository.findSumMonthOutput());
+		TotalMonth totalMonth = outputService.findSumMonthOutput();
+		
+		model.addAttribute("January", totalMonth.getJanuary());
+		model.addAttribute("February", totalMonth.getFebruary());
+		model.addAttribute("March", totalMonth.getMarch());
+		model.addAttribute("April", totalMonth.getApril());
+		model.addAttribute("May", totalMonth.getMay());
+		model.addAttribute("June", totalMonth.getJune());
+		model.addAttribute("August", totalMonth.getAugust());
+		model.addAttribute("September", totalMonth.getSeptember());
+		model.addAttribute("October", totalMonth.getOctober());
+		model.addAttribute("November", totalMonth.getNovember());
+		model.addAttribute("December", totalMonth.getDecember());
 		
 		// 今日の日付を取得
 		model.addAttribute("today", budgetService.getToday());

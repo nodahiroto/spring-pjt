@@ -1,6 +1,21 @@
 output_chart();
 function output_chart() {
-	var ctx = document.getElementById("myChart").getContext("2d");
+//	var ctx = document.getElementById("myChart").getContext("2d");
+	const $myChart = document.querySelector('#myChart');
+	const ctx = $myChart.getContext('2d');
+	
+	const january = $myChart.dataset.January;
+	const february = $myChart.dataset.February;
+	const march = $myChart.dataset.March;
+	const april = $myChart.dataset.April;
+	const may = $myChart.dataset.May;
+	const june = $myChart.dataset.June;
+	const july = $myChart.dataset.July;
+	const august = $myChart.dataset.August;
+	const september = $myChart.dataset.September;
+	const october = $myChart.dataset.October;
+	const november = $myChart.dataset.November;
+	const december = $myChart.dataset.December;
 	
 	new Chart(ctx, {
     type: 'line',
@@ -8,7 +23,7 @@ function output_chart() {
         labels: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
         datasets: [{
             label: '月別支出金額',
-            data: [80000, 39000, 30000, 50000, 20000, 30000, 15000, 60000, 45000, 38000, 29000, 58000],
+            data: [january, february, march, april, may, june, july, august, september, october, november, december],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

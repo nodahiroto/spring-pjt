@@ -8,23 +8,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.demo.model.Output;
-import com.example.demo.model.beans.ByMonth;
 import com.example.demo.model.beans.OutputMonth;
 
 public interface OutputRepository extends JpaRepository<Output, Long> {
 
-	    // 入金の合計額
+	    // 支出の合計額
 		@Query(value = "select SUM(out_price) from many_outputs", nativeQuery = true)
 		public int getAllOutput();
 		
-		// 月別の入金合計金額
+		// 月別の支出合計金額
 		@Query(value = "SELECT DATE_FORMAT(out_date, '%Y%m') as YM, SUM(out_price) "
 				+ "FROM many_outputs GROUP BY DATE_FORMAT(out_date, '%Y%m')", nativeQuery = true)
-		public List<Object[]> getSumMonthOutput();
+		public Object[][] getSumMonthOutput();
 		
-		default List<ByMonth> findSumMonthOutput() {
-			return getSumMonthOutput().stream().map(ByMonth::new).collect(Collectors.toList());
-		}
+//		default List<ByMonth> findSumMonthOutput() {
+//			return getSumMonthOutput().stream.map(ByMonth::new).collect(Collectors.toList());
+//		}
 		
 		// 現在月のデータ一覧を取得
 		@Query(value = "SELECT * FROM many_outputs WHERE MONTH(out_date) = MONTH(CURRENT_DATE()) "
@@ -50,4 +49,9 @@ public interface OutputRepository extends JpaRepository<Output, Long> {
 		// 特定の月の合計金額
 		@Query(value = "SELECT SUM(out_price) FROM many_outputs WHERE MONTH(out_date) = :month", nativeQuery = true)
 		public int getTotalMonthOutput(@Param("month") int month);
+		
+		// 特定の月のデータが存在するかチェック
+		@Query(value = "SELECT EXISTS(SELECT * FROM many_outputs WHERE MONTH(out_date) = :month)", nativeQuery = true)
+		public int checkMonth(@Param("month") int month);
+		
 }

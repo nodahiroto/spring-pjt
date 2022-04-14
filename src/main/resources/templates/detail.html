@@ -63,9 +63,14 @@
 </table>
 <h4>支出合計：[[${allOutput}]]</h4>
 <a href="/home">ホーム画面に戻る</a>
-<div class="chart-container" style="position: relative; height:40vh; width:80vw">
-    <canvas id="myChart"></canvas>
-</div>
-<script type="text/javascript" th:src="@{/js/line-chart.js}"></script>
+
+ 	<div class="chart-container" style="position: relative; height: 40vh; width: 80vw"> 
+		<canvas id="myChart" data-January="${February}" data-February="${February}"
+		data-March="${March}" data-April="${April}" data-May="${May}"
+		data-June="${June}" data-July="${July}" data-August="${August}"
+		data-September="${September}" data-October="${October}"
+		data-November="${November}" data-December="${December}"></canvas>
+ 	</div>
+	<script type="text/javascript" th:src="@{/js/line-chart.js}"></script>
 </body>
 </html>
