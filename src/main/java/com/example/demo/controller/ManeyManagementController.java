@@ -148,11 +148,15 @@ public class ManeyManagementController {
 		model.addAttribute("April", totalMonth.getApril());
 		model.addAttribute("May", totalMonth.getMay());
 		model.addAttribute("June", totalMonth.getJune());
+		model.addAttribute("July", totalMonth.getJuly());
 		model.addAttribute("August", totalMonth.getAugust());
 		model.addAttribute("September", totalMonth.getSeptember());
 		model.addAttribute("October", totalMonth.getOctober());
 		model.addAttribute("November", totalMonth.getNovember());
 		model.addAttribute("December", totalMonth.getDecember());
+		
+		int point[] = {1,2,3,4,5,6,7,8,9,10,11,12};
+		model.addAttribute("point", point);
 		
 		// 今日の日付を取得
 		model.addAttribute("today", budgetService.getToday());

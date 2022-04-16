@@ -64,13 +64,66 @@
 <h4>支出合計：[[${allOutput}]]</h4>
 <a href="/home">ホーム画面に戻る</a>
 
- 	<div class="chart-container" style="position: relative; height: 40vh; width: 80vw"> 
-		<canvas id="myChart" data-January="${February}" data-February="${February}"
-		data-March="${March}" data-April="${April}" data-May="${May}"
-		data-June="${June}" data-July="${July}" data-August="${August}"
-		data-September="${September}" data-October="${October}"
-		data-November="${November}" data-December="${December}"></canvas>
- 	</div>
-	<script type="text/javascript" th:src="@{/js/line-chart.js}"></script>
+<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+<canvas id="myChart"></canvas>
+</div>
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+		output_chart();
+		function output_chart() {
+			var ctx = document.getElementById("myChart").getContext("2d");
+			var january = /*[[ ${January} ]]*/ 'default';
+			var february = /*[[${February}]]*/ 'default';
+			var march = /*[[${March}]]*/ 'default';
+			var april = /*[[${April}]]*/ 'default';
+			var may = /*[[${May}]]*/ 'default';
+			var june = /*[[${June}]]*/ 'default';
+			var july = /*[[${July}]]*/ 'default';
+			var august = /*[[${August}]]*/ 'default';
+			var september = /*[[${September}]]*/ 'default';
+			var october = /*[[${October}]]*/ 'default';
+			var november = /*[[${November}]]*/ 'default';
+			var december = /*[[${December}]]*/ 'default';
+
+			new Chart(
+					ctx,
+					{
+						type : 'line',
+						data : {
+							labels : [ "1月", "2月", "3月", "4月", "5月", "6月",
+									"7月", "8月", "9月", "10月", "11月", "12月" ],
+							datasets : [ {
+								label : '月別支出金額',
+								data : [january, february, march, april, may, june,
+									july, august, september, october, november, december],
+								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+										'rgba(54, 162, 235, 0.2)',
+										'rgba(255, 206, 86, 0.2)',
+										'rgba(75, 192, 192, 0.2)',
+										'rgba(153, 102, 255, 0.2)',
+										'rgba(255, 159, 64, 0.2)' ],
+								borderColor : [ 'rgba(255,99,132,1)',
+										'rgba(54, 162, 235, 1)',
+										'rgba(255, 206, 86, 1)',
+										'rgba(75, 192, 192, 1)',
+										'rgba(153, 102, 255, 1)',
+										'rgba(255, 159, 64, 1)' ],
+								borderWidth : 1
+							} ]
+						},
+						options : {
+							layout : {
+								padding : {
+									left : 400,
+									right : 0,
+									top : 150,
+									bottom : 150
+								}
+							},
+						}
+					});
+		}
+		/*]]>*/
+	</script>
 </body>
 </html>
