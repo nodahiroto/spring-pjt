@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.AppUser;
@@ -90,7 +91,7 @@ public class ManeyManagementController {
 		
 		// 入金処理
 		inputService.payment(input);
-		redirectAttributes.addFlashAttribute("message", "入金しました。");
+		redirectAttributes.addFlashAttribute("message", "入金記録をしました。");
 		
 		return "redirect:/home";
 	}
@@ -113,20 +114,31 @@ public class ManeyManagementController {
 		
 		// 支出処理
 		outputService.expenditure(output);
-		redirectAttributes.addFlashAttribute("message", "支出しました。");
+		redirectAttributes.addFlashAttribute("message", "支出記録をしました。");
 
 		return "redirect:/home";
 	}
 	
 	@GetMapping("/detail")
-	public String detailList(@AuthenticationPrincipal User user, Model model) {
+	public String detailList(@RequestParam(name = "sort", required = false) Long sort, @AuthenticationPrincipal User user, Model model) {
 		
 		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
+		
+		// 今日の日付を取得
+		model.addAttribute("today", budgetService.getToday());
 		
 		// 入金履歴の取得
 		List<Input> inputList = inputRepository.findAll();
 		// 支出履歴の取得
 		List<Output> outputList = outputRepository.findAll();
+		
+        if(sort == 2) {
+			
+		}
+        
+        if(sort == 3) {
+        	
+        }
 		
 		// 入金の合計を取得
 		int allInput = inputRepository.getAllInput();
@@ -154,12 +166,6 @@ public class ManeyManagementController {
 		model.addAttribute("October", totalMonth.getOctober());
 		model.addAttribute("November", totalMonth.getNovember());
 		model.addAttribute("December", totalMonth.getDecember());
-		
-		int point[] = {1,2,3,4,5,6,7,8,9,10,11,12};
-		model.addAttribute("point", point);
-		
-		// 今日の日付を取得
-		model.addAttribute("today", budgetService.getToday());
 		
 		return "/detail";
 	}
