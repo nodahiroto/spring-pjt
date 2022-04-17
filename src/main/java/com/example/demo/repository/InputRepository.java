@@ -45,4 +45,12 @@ public interface InputRepository extends JpaRepository<Input, Long> {
 	// 特定の月の合計金額
 	@Query(value = "SELECT SUM(in_price) FROM many_inputs WHERE MONTH(in_date) = :month", nativeQuery = true)
 	public int getTotalMonthInput(@Param("month") int month);
+	
+	// 全データを取得(日付 昇順)
+	@Query(value = "SELECT * FROM many_inputs ORDER BY in_date", nativeQuery = true)
+	public List<Input> findInputUp();
+	
+	// 全データを取得(日付 降順)
+	@Query(value = "SELECT * FROM many_inputs ORDER BY in_date DESC", nativeQuery = true)
+	public List<Input> findInputDown();
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.AppUser;
@@ -90,7 +91,7 @@ public class ManeyManagementController {
 		
 		// 入金処理
 		inputService.payment(input);
-		redirectAttributes.addFlashAttribute("message", "入金しました。");
+		redirectAttributes.addFlashAttribute("message", "入金記録をしました。");
 		
 		return "redirect:/home";
 	}
@@ -113,31 +114,56 @@ public class ManeyManagementController {
 		
 		// 支出処理
 		outputService.expenditure(output);
-		redirectAttributes.addFlashAttribute("message", "支出しました。");
+		redirectAttributes.addFlashAttribute("message", "支出記録をしました。");
 
 		return "redirect:/home";
 	}
 	
 	@GetMapping("/detail")
-	public String detailList(@AuthenticationPrincipal User user, Model model) {
+	public String detailList(@RequestParam(name = "sort", defaultValue = "1") int sort, @AuthenticationPrincipal User user, Model model) {
 		
 		AppUser appuser = appUserRepository.findByEmail(user.getUsername());
 		
-		// 入金履歴の取得
-		List<Input> inputList = inputRepository.findAll();
-		// 支出履歴の取得
-		List<Output> outputList = outputRepository.findAll();
+		// 今日の日付を取得
+		model.addAttribute("today", budgetService.getToday());
+		
+		if (sort == 1) {
+			// 入金履歴の取得(履歴順)
+			List<Input> inputList = inputRepository.findAll();
+			// 支出履歴の取得(履歴順)
+			List<Output> outputList = outputRepository.findAll();
+			model.addAttribute("inputList", inputList);
+			model.addAttribute("outputList", outputList);
+		}
+
+		if (sort == 2) {
+			// 入金履歴の取得(日付 昇順)
+			List<Input> inputListUp = inputRepository.findInputUp();
+			model.addAttribute("inputList", inputListUp);
+			// 支出履歴の取得(日付 昇順)
+			List<Output> outputListUp = outputRepository.findOutputUp();
+			model.addAttribute("outputList", outputListUp);
+
+		}
+		
+		if (sort == 3) {
+			// 入金履歴の取得(日付 降順)
+			List<Input> inputListDown = inputRepository.findInputDown();
+			model.addAttribute("inputList", inputListDown);
+			// 支出履歴の取得(日付 降順)
+			List<Output> outputListDown = outputRepository.findOutputDown();
+			model.addAttribute("outputList", outputListDown);
+
+		} 
 		
 		// 入金の合計を取得
 		int allInput = inputRepository.getAllInput();
 		// 支出の合計を取得
 		int allOutput = outputRepository.getAllOutput();
-		
-		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
-		model.addAttribute("inputList", inputList);
-		model.addAttribute("outputList", outputList);
 		model.addAttribute("allInput", allInput);
 		model.addAttribute("allOutput", allOutput);
+		
+		model.addAttribute("appuser", appUserRepository.findById(appuser.getUserId()));
 		
 		// 月別の支出金額を取得
 		TotalMonth totalMonth = outputService.findSumMonthOutput();
@@ -154,12 +180,6 @@ public class ManeyManagementController {
 		model.addAttribute("October", totalMonth.getOctober());
 		model.addAttribute("November", totalMonth.getNovember());
 		model.addAttribute("December", totalMonth.getDecember());
-		
-		int point[] = {1,2,3,4,5,6,7,8,9,10,11,12};
-		model.addAttribute("point", point);
-		
-		// 今日の日付を取得
-		model.addAttribute("today", budgetService.getToday());
 		
 		return "/detail";
 	}

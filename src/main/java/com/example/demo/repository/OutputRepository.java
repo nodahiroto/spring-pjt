@@ -54,4 +54,11 @@ public interface OutputRepository extends JpaRepository<Output, Long> {
 		@Query(value = "SELECT EXISTS(SELECT * FROM many_outputs WHERE MONTH(out_date) = :month)", nativeQuery = true)
 		public int checkMonth(@Param("month") int month);
 		
+		// 全データを取得(日付 昇順)
+		@Query(value = "SELECT * FROM many_outputs ORDER BY out_date", nativeQuery = true)
+		public List<Output> findOutputUp();
+		
+		// 全データを取得(日付 降順)
+		@Query(value = "SELECT * FROM many_outputs ORDER BY out_date DESC", nativeQuery = true)
+		public List<Output> findOutputDown();
 }
