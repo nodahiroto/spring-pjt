@@ -2,9 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/app.css}" rel="stylesheet">
 <title>月別詳細画面</title>
 </head>
 <body>
+<!-- ヘッダー -->
+  <div th:replace="~{fragments/header::header}"></div>
 <h2 th:text="${today}"></h2>
 <h3 th:text="${number}"></h3>
 <div th:text="${nullMonth}"></div>
@@ -59,5 +63,7 @@
 </table>
 <h4>支出合計：[[${TotalMonthOutput}]]</h4>
 <a href="/detail">詳細画面に戻る</a>
+<!-- フッター -->
+  <div th:replace="~{fragments/footer::footer}"></div>
 </body>
 </html>
