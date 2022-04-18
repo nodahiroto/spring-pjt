@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" th:src="@{/js/today.js}"></script>
+<link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/app.css}" rel="stylesheet">
 <title>支出画面</title>
 </head>
 <body>
+<!-- ヘッダー -->
+  <div th:replace="~{fragments/header::header}"></div>
 <h4>支出画面</h4>
 <form th:action="@{/output}" method="post" th:object="${output}">
     <!-- <input type="hidden" name="userId" th:value="${appuser.userId}"> -->
@@ -27,5 +30,7 @@
   <input type="submit" value="OK">
 </form>
 <a href="/home">ホーム画面に戻る</a>
+<!-- フッター -->
+  <div th:replace="~{fragments/footer::footer}"></div>
 </body>
 </html>

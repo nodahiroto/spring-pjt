@@ -2,9 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/app.css}" rel="stylesheet">
 <title>ログイン</title>
 </head>
 <body>
+<!-- ヘッダー -->
+  <div th:replace="~{fragments/header::header}"></div>
 <h2>ログイン</h2>
   <div th:if="${param.error}">
     ログインに失敗しました。
@@ -30,5 +34,7 @@
   <button type="submit">ログイン</button>
 </form>
 <a href="/register">ユーザー登録はこちら</a>
+<!-- フッター -->
+  <div th:replace="~{fragments/footer::footer}"></div>
 </body>
 </html>

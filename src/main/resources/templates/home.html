@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
-<title>ホーム画面</title>
+<link th:href="@{/css/app.css}" rel="stylesheet">
+<title>home</title>
 </head>
 <body>
-<header>
-  <p>おさいふ管理アプリ</p>
-  <a th:href="@{/logout}">ログアウト</a>
-  <div th:if="${success}">[[${success}]]</div>
-  <div th:if="${message}">[[${message}]]</div>
-</header>
+  <!-- ヘッダー -->
+  <div th:replace="~{fragments/header::header}"></div>
+
 <h2 th:text="${today}"></h2>
+<div th:if="${success}">[[${success}]]</div>
+<div th:if="${message}">[[${message}]]</div>
 
 <h3>現在の残高</h3>
 <div th:text="${budgetRemain}"></div>
@@ -22,7 +22,6 @@
 </form>
 <a href="/input">入金</a>
 <a href="/output">支出</a>
-<a href="/detail">詳細</a>
 
 <h3>今月の予算</h3>
 <div th:text="${totalNowAmmountMonth}"></div>
@@ -76,5 +75,7 @@
   </tbody>
 </table>
 <h4>支出合計：[[${totalNowMonthOutput}]]</h4>
+<!-- フッター -->
+  <div th:replace="~{fragments/footer::footer}"></div>
 </body>
 </html>

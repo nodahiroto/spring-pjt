@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:fragment="header">
+		<header>
+			<h3>Money Management</h3>
+			<nav>
+				<ul class="nav_links">
+					<li><a href="/home">Home</a></li>
+					<li><a href="/detail">Detail</a></li>
+					<li><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+</body>
+</html>
