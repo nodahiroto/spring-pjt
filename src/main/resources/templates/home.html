@@ -2,80 +2,102 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}"
+	rel="stylesheet">
 <link th:href="@{/css/app.css}" rel="stylesheet">
 <title>home</title>
 </head>
 <body>
-  <!-- ヘッダー -->
-  <div th:replace="~{fragments/header::header}"></div>
+	<!-- ヘッダー -->
+	<div th:replace="~{fragments/header::header}"></div>
 
-<h2 th:text="${today}"></h2>
 <div th:if="${success}">[[${success}]]</div>
 <div th:if="${message}">[[${message}]]</div>
 
-<h3>現在の残高</h3>
-<div th:text="${budgetRemain}"></div>
-<form th:action="@{/reset}" method="post">
-  <!-- <input type="hidden" name="userId" th:value="${appuser.userId}"> -->
-  <button>リセット</button>
-</form>
-<a href="/input">入金</a>
-<a href="/output">支出</a>
+	<div class="d-flex flex-column bd-highlight mb-3">
+		<div class="p-2 bd-highlight">
+			<div class="d-flex justify-content-center">
+				<h2 th:text="${today}"></h2>
+			</div>
+		</div>
+		<div class="p-2 bd-highlight">
+			<h3 class="d-flex justify-content-center">現在の残高</h3>
+		</div>
+		<div class="p-2 bd-highlight">
+			<div class="d-flex justify-content-center">
+				<div th:text="${budgetRemain}"></div>
+			</div>
+		</div>
+		<div class="p-2 bd-highlight">
+			<h3 class="d-flex justify-content-center">今月の予算</h3>
+		</div>
+		<div class="p-2 bd-highlight">
+			<div class="d-flex justify-content-center">
+				<div th:text="${totalNowAmmountMonth}"></div>
+			</div>
+		</div>
+	</div>
 
-<h3>今月の予算</h3>
-<div th:text="${totalNowAmmountMonth}"></div>
-
-<p>今月の入金履歴</p>
-<table>
-  <thead>
-    <tr>
-      <th>日付</th>
-      <th>メモ</th>
-      <th>金額</th>
-      <th>投稿日時</th>
-      <th>更新日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="input : ${nowMonthInput}">
-      <td>[[${input.inDate}]]</td>
-      <td>[[${input.inContent}]]</td>
-      <td>[[${input.inPrice}]]</td>
-      <td th:if="inList.CreatedAt">[[${input.CreatedAt}]]</td>
-      <td th:if="inList.UpdatedAt">[[${input.UpdatedAt}]]</td>
-      <td><a th:href="@{/input/edit/{id}(id=${input.inputId})}">編集</a></td>
-      <td><a th:href="@{/input/delete/{id}(id=${input.inputId})}">削除</a></td>
-    </tr>
-  </tbody>
-</table>
-<h4>入金合計：[[${totalNowMonthInput}]]</h4>
-
-<p>今月の支出履歴</p>
-<table>
-  <thead>
-    <tr>
-      <th>日付</th>
-      <th>メモ</th>
-      <th>金額</th>
-      <th>投稿日時</th>
-      <th>更新日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="output : ${nowMonthOutput}">
-      <td>[[${output.outDate}]]</td>
-      <td>[[${output.outContent}]]</td>
-      <td>[[${output.outPrice}]]</td>
-      <td th:if="outList.CreatedAt">[[${output.CreatedAt}]]</td>
-      <td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
-      <td><a th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
-      <td><a th:href="@{/output/delete/{id}(id=${output.outputId})}">削除</a></td>
-    </tr>
-  </tbody>
-</table>
-<h4>支出合計：[[${totalNowMonthOutput}]]</h4>
-<!-- フッター -->
-  <div th:replace="~{fragments/footer::footer}"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<a href="/input">入金</a>
+				<p>今月の入金履歴</p>
+				<table>
+					<thead>
+						<tr>
+							<th>日付</th>
+							<th>メモ</th>
+							<th>金額</th>
+							<th>投稿日時</th>
+							<th>更新日時</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="input : ${nowMonthInput}">
+							<td>[[${input.inDate}]]</td>
+							<td>[[${input.inContent}]]</td>
+							<td>[[${input.inPrice}]]</td>
+							<td th:if="inList.CreatedAt">[[${input.CreatedAt}]]</td>
+							<td th:if="inList.UpdatedAt">[[${input.UpdatedAt}]]</td>
+							<td><a th:href="@{/input/edit/{id}(id=${input.inputId})}">編集</a></td>
+							<td><a th:href="@{/input/delete/{id}(id=${input.inputId})}">削除</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4>入金合計：[[${totalNowMonthInput}]]</h4>
+			</div>
+			<div class="col-md-6">
+				<a href="/output">支出</a>
+				<p>今月の支出履歴</p>
+				<table>
+					<thead>
+						<tr>
+							<th>日付</th>
+							<th>メモ</th>
+							<th>金額</th>
+							<th>投稿日時</th>
+							<th>更新日時</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="output : ${nowMonthOutput}">
+							<td>[[${output.outDate}]]</td>
+							<td>[[${output.outContent}]]</td>
+							<td>[[${output.outPrice}]]</td>
+							<td th:if="outList.CreatedAt">[[${output.CreatedAt}]]</td>
+							<td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
+							<td><a th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
+							<td><a
+								th:href="@{/output/delete/{id}(id=${output.outputId})}">削除</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4>支出合計：[[${totalNowMonthOutput}]]</h4>
+			</div>
+		</div>
+	</div>
+	<!-- フッター -->
+	<div th:replace="~{fragments/footer::footer}"></div>
 </body>
 </html>
