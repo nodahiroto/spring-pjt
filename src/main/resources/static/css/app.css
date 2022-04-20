@@ -33,3 +33,22 @@ footer {
 	font-size: 15px;
 	font-weight: 500;
 }
+
+.this_month {
+	font-size: 25px;
+}
+
+.btn {
+	width: 140px;
+	height: 60px;
+	text-align: center;
+	font-size: 30px;
+	margin-left: 260px;
+}
+
+.record {
+	text-align: center;
+	margin-left: 30px;
+	margin-top: 80px;
+	margin-bottom: 50px;
+}

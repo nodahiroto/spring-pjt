@@ -21,28 +21,28 @@
 			</div>
 		</div>
 		<div class="p-2 bd-highlight">
-			<h3 class="d-flex justify-content-center">現在の残高</h3>
+			<h3 class="d-flex justify-content-center mt-5">現在の残高</h3>
 		</div>
 		<div class="p-2 bd-highlight">
 			<div class="d-flex justify-content-center">
-				<div th:text="${budgetRemain}"></div>
+				<div class="this_month" th:text="${budgetRemain}"></div>
 			</div>
 		</div>
 		<div class="p-2 bd-highlight">
-			<h3 class="d-flex justify-content-center">今月の予算</h3>
+			<h3 class="d-flex justify-content-center mt-3">今月の予算</h3>
 		</div>
 		<div class="p-2 bd-highlight">
 			<div class="d-flex justify-content-center">
-				<div th:text="${totalNowAmmountMonth}"></div>
+				<div class="this_month" th:text="${totalNowAmmountMonth}"></div>
 			</div>
 		</div>
 	</div>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<a href="/input">入金</a>
-				<p>今月の入金履歴</p>
+			<div class="col-6 mt-5">
+			    <a class="btn btn-outline-success" href="/input">入金</a>
+				<h4 class="record">今月の入金履歴</h4>
 				<table>
 					<thead>
 						<tr>
@@ -65,11 +65,11 @@
 						</tr>
 					</tbody>
 				</table>
-				<h4>入金合計：[[${totalNowMonthInput}]]</h4>
+				<h5>入金合計：[[${totalNowMonthInput}]]</h5>
 			</div>
-			<div class="col-md-6">
-				<a href="/output">支出</a>
-				<p>今月の支出履歴</p>
+			<div class="col-6 mt-5">
+				<a class="btn btn-outline-primary" href="/output">支出</a>
+				<h4 class="record">今月の支出履歴</h4>
 				<table>
 					<thead>
 						<tr>
@@ -93,7 +93,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<h4>支出合計：[[${totalNowMonthOutput}]]</h4>
+				<h5>支出合計：[[${totalNowMonthOutput}]]</h5>
 			</div>
 		</div>
 	</div>
