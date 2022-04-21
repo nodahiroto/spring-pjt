@@ -11,8 +11,8 @@
 	<!-- ヘッダー -->
 	<div th:replace="~{fragments/header::header}"></div>
 
-<div th:if="${success}">[[${success}]]</div>
-<div th:if="${message}">[[${message}]]</div>
+<div class="alert alert-success" role="alert" th:if="${success}">[[${success}]]</div>
+<div class="alert alert-primary" role="alert" th:if="${message}">[[${message}]]</div>
 
 	<div class="d-flex flex-column bd-highlight mb-3">
 		<div class="p-2 bd-highlight">
@@ -41,16 +41,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-6 mt-5">
-			    <a class="btn btn-outline-success" href="/input">入金</a>
+			    <a class="btn btn-outline-dark" href="/input">入金</a>
 				<h4 class="record">今月の入金履歴</h4>
-				<table>
+				<table class="table">
 					<thead>
 						<tr>
-							<th>日付</th>
-							<th>メモ</th>
-							<th>金額</th>
-							<th>投稿日時</th>
-							<th>更新日時</th>
+							<th scope="col">日付</th>
+							<th scope="col">メモ</th>
+							<th scope="col">金額</th>
+							<th scope="col">投稿日時</th>
+							<th scope="col">更新日時</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -65,19 +67,21 @@
 						</tr>
 					</tbody>
 				</table>
-				<h5>入金合計：[[${totalNowMonthInput}]]</h5>
+				<h5 class="mt-5">入金合計：[[${totalNowMonthInput}]]</h5>
 			</div>
 			<div class="col-6 mt-5">
-				<a class="btn btn-outline-primary" href="/output">支出</a>
+				<a class="btn btn-outline-dark" href="/output">支出</a>
 				<h4 class="record">今月の支出履歴</h4>
-				<table>
+				<table class="table">
 					<thead>
 						<tr>
-							<th>日付</th>
-							<th>メモ</th>
-							<th>金額</th>
-							<th>投稿日時</th>
-							<th>更新日時</th>
+							<th scope="col">日付</th>
+							<th scope="col">メモ</th>
+							<th scope="col">金額</th>
+							<th scope="col">投稿日時</th>
+							<th scope="col">更新日時</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -93,7 +97,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<h5>支出合計：[[${totalNowMonthOutput}]]</h5>
+				<h5 class="mt-5">支出合計：[[${totalNowMonthOutput}]]</h5>
 			</div>
 		</div>
 	</div>

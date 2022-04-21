@@ -1,3 +1,7 @@
+body {
+	background-color: #F0FFFF;
+}
+
 h3, a {
 	color: black;
 	font-size: 15px;
@@ -6,16 +10,18 @@ h3, a {
 }
 
 h3 {
-	font-size: 26px;
+	font-size: 24px;
 	margin-right: auto;
 }
 
 header {
+	height: 70px;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	padding: 30px 10%;
-	margin-bottom: 20px;
+	padding: 15px 10%;
+	margin-bottom: 30px;
+	font-family: Georgia, serif;
 }
 
 .nav_links {
@@ -24,7 +30,7 @@ header {
 
 .nav_links li {
 	display: inline-block;
-	padding: 0 20px;
+	padding: 0px 20px;
 }
 
 footer {
