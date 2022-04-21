@@ -10,23 +10,39 @@
 <body>
   <!-- ヘッダー -->
   <div th:replace="~{fragments/header::header}"></div>
-<h2 th:text="${today}"></h2>
-<div th:text="${errorMonth}"></div>
-<form th:action="@{/month}" method="get">
-  <label for="number">月別の詳細を見る：</label>
-  <input type="text" name="number" required>月
-  <input type="submit" value="検索">
-</form>
-<form th:action="@{/detail}" method="get">
-  <p>並べ替え<br>
-  <select name="sort">
-    <option value="1">投稿順</option>
-    <option value="2">日付 昇順</option>
-    <option value="3">日付 降順</option>
-  </select>
-  <input type="submit" value="確認">
-  </p>
-</form>
+  
+  <!-- エラーメッセージ -->
+  <div th:text="${errorMonth}"></div>
+  
+  <div class="d-flex flex-column bd-highlight mb-3">
+		<div class="p-2 bd-highlight">
+			<div class="d-flex justify-content-center">
+				<h2 th:text="${today}"></h2>
+			</div>
+		</div>
+		<div class="p-2 bd-highlight">
+			<form class="d-flex justify-content-center mt-5" th:action="@{/month}" method="get">
+				<label for="number" class="form-label">月別の詳細を見る</label>
+				<input type="text" class="form-control-md ml-2" id="number" name="number" required>　月
+				<input class="btn btn-outline-secondary btn-sm ml-2" type="submit" value="検索">
+			</form>
+		</div>
+		<div class="p-2 bd-highlight">
+			<form class="d-flex justify-content-center mt-3"
+				th:action="@{/detail}" method="get">
+				<!-- <p>並べ替え<br> -->
+				<select class="form-select form-select-sm" aria-label="Default select example" name="sort">
+					<option selected>並べ替え</option>
+					<option value="1">投稿順</option>
+					<option value="2">日付 昇順</option>
+					<option value="3">日付 降順</option>
+				</select>
+				<input class="btn btn-outline-secondary btn-sm" type="submit" value="確認">
+				<!-- </p> -->
+			</form>
+		</div>
+	</div>
+
 <p>入金履歴</p>
 <table>
   <thead>

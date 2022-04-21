@@ -34,7 +34,7 @@ header {
 }
 
 footer {
-	margin-top: 200px;
+	margin-top: 300px;
 	text-align: center;
 	font-size: 15px;
 	font-weight: 500;
@@ -44,7 +44,7 @@ footer {
 	font-size: 25px;
 }
 
-.btn {
+.btn-outline-dark {
 	width: 140px;
 	height: 60px;
 	text-align: center;
