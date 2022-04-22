@@ -58,3 +58,13 @@ footer {
 	margin-top: 80px;
 	margin-bottom: 50px;
 }
+
+.form-select-sm {
+	width: 25%;
+	margin-right: 5px;
+}
+
+.form-control-md {
+	height: 30px;
+	margin-right: 7px;
+}

@@ -22,82 +22,93 @@
 		</div>
 		<div class="p-2 bd-highlight">
 			<form class="d-flex justify-content-center mt-5" th:action="@{/month}" method="get">
-				<label for="number" class="form-label">月別の詳細を見る</label>
-				<input type="text" class="form-control-md ml-2" id="number" name="number" required>　月
-				<input class="btn btn-outline-secondary btn-sm ml-2" type="submit" value="検索">
+				<label for="number" class="form-label">月別の詳細を見る：　</label>
+				<input type="text" class="form-control-md" id="number" name="number" required> 月　
+				<input class="btn btn-outline-primary" type="submit" value="検索">
 			</form>
 		</div>
 		<div class="p-2 bd-highlight">
-			<form class="d-flex justify-content-center mt-3"
-				th:action="@{/detail}" method="get">
-				<!-- <p>並べ替え<br> -->
+			<form class="d-flex justify-content-center mt-3" th:action="@{/detail}" method="get">
 				<select class="form-select form-select-sm" aria-label="Default select example" name="sort">
 					<option selected>並べ替え</option>
 					<option value="1">投稿順</option>
 					<option value="2">日付 昇順</option>
 					<option value="3">日付 降順</option>
 				</select>
-				<input class="btn btn-outline-secondary btn-sm" type="submit" value="確認">
-				<!-- </p> -->
+				<input class="btn btn-outline-primary" type="submit" value="確認">
 			</form>
 		</div>
 	</div>
 
-<p>入金履歴</p>
-<table>
-  <thead>
-    <tr>
-      <th>日付</th>
-      <th>メモ</th>
-      <th>金額</th>
-      <th>投稿日時</th>
-      <th>更新日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="inList : ${inputList}">
-      <td>[[${inList.inDate}]]</td>
-      <td>[[${inList.inContent}]]</td>
-      <td>[[${inList.inPrice}]]</td>
-      <td th:if="inList.CreatedAt">[[${inList.CreatedAt}]]</td>
-      <td th:if="inList.UpdatedAt">[[${inList.UpdatedAt}]]</td>
-      <td><a th:href="@{/input/edit/{id}(id=${inList.inputId})}">編集</a></td>
-      <td><a th:href="@{/input/delete/{id}(id=${inList.inputId})}">削除</a></td>
-    </tr>
-  </tbody>
-</table>
-<h4>入金合計：[[${allInput}]]</h4>
-
-<p>支出履歴</p>
-<table>
-  <thead>
-    <tr>
-      <th>日付</th>
-      <th>メモ</th>
-      <th>金額</th>
-      <th>投稿日時</th>
-      <th>更新日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="outList : ${outputList}">
-      <td>[[${outList.outDate}]]</td>
-      <td>[[${outList.outContent}]]</td>
-      <td>[[${outList.outPrice}]]</td>
-      <td th:if="outList.CreatedAt">[[${outList.CreatedAt}]]</td>
-      <td th:if="outList.UpdatedAt">[[${outList.UpdatedAt}]]</td>
-      <td><a th:href="@{/output/edit/{id}(id=${outList.outputId})}">編集</a></td>
-      <td><a th:href="@{/output/delete/{id}(id=${outList.outputId})}">削除</a></td>
-    </tr>
-  </tbody>
-</table>
-<h4>支出合計：[[${allOutput}]]</h4>
-<a href="/home">ホーム画面に戻る</a>
+	<div class="container">
+		<div class="row">
+			<div class="col-6 mt-5">
+				<h4 class="record">入金履歴</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">日付</th>
+							<th scope="col">メモ</th>
+							<th scope="col">金額</th>
+							<th scope="col">投稿日時</th>
+							<th scope="col">更新日時</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="inList : ${inputList}">
+							<td>[[${inList.inDate}]]</td>
+							<td>[[${inList.inContent}]]</td>
+							<td>[[${inList.inPrice}]]</td>
+							<td th:if="inList.CreatedAt">[[${inList.CreatedAt}]]</td>
+							<td th:if="inList.UpdatedAt">[[${inList.UpdatedAt}]]</td>
+							<td><a th:href="@{/input/edit/{id}(id=${inList.inputId})}">編集</a></td>
+							<td><a th:href="@{/input/delete/{id}(id=${inList.inputId})}">削除</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4 class="mt-5">入金合計：[[${allInput}]]</h4>
+			</div>
+			
+			<div class="col-6 mt-5">
+				<h4 class="record">支出履歴</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">日付</th>
+							<th scope="col">メモ</th>
+							<th scope="col">金額</th>
+							<th scope="col">投稿日時</th>
+							<th scope="col">更新日時</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="outList : ${outputList}">
+							<td>[[${outList.outDate}]]</td>
+							<td>[[${outList.outContent}]]</td>
+							<td>[[${outList.outPrice}]]</td>
+							<td th:if="outList.CreatedAt">[[${outList.CreatedAt}]]</td>
+							<td th:if="outList.UpdatedAt">[[${outList.UpdatedAt}]]</td>
+							<td><a
+								th:href="@{/output/edit/{id}(id=${outList.outputId})}">編集</a></td>
+							<td><a
+								th:href="@{/output/delete/{id}(id=${outList.outputId})}">削除</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4 class="mt-5">支出合計：[[${allOutput}]]</h4>
+			</div>
+		</div>
+	</div>
 
 <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-<canvas id="myChart"></canvas>
+  <canvas id="myChart"></canvas>
 </div>
-	<script type="text/javascript" th:inline="javascript">
+
+<script type="text/javascript" th:inline="javascript">
 	/*<![CDATA[*/
 		output_chart();
 		function output_chart() {
@@ -142,6 +153,8 @@
 							} ]
 						},
 						options : {
+							responsive: true,
+							
 							layout : {
 								padding : {
 									left : 400,
@@ -155,6 +168,7 @@
 		}
 		/*]]>*/
 	</script>
+	
 	<!-- フッター -->
   <div th:replace="~{fragments/footer::footer}"></div>
 </body>
