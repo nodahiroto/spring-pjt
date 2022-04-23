@@ -56,19 +56,21 @@
 						</tr>
 					</thead>
 					<tbody>
+					<tbody>
 						<tr th:each="input : ${nowMonthInput}">
 							<td>[[${input.inDate}]]</td>
 							<td>[[${input.inContent}]]</td>
 							<td>[[${input.inPrice}]]</td>
 							<td th:if="inList.CreatedAt">[[${input.CreatedAt}]]</td>
 							<td th:if="inList.UpdatedAt">[[${input.UpdatedAt}]]</td>
-							<td><a th:href="@{/input/edit/{id}(id=${input.inputId})}">編集</a></td>
-							<td><a th:href="@{/input/delete/{id}(id=${input.inputId})}">削除</a></td>
+							<td><a class="link-primary" th:href="@{/input/edit/{id}(id=${input.inputId})}">編集</a></td>
+							<td><a class="link-primary" th:href="@{/input/delete/{id}(id=${input.inputId})}">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
 				<h5 class="mt-5">入金合計：[[${totalNowMonthInput}]]</h5>
 			</div>
+			
 			<div class="col-6 mt-5">
 				<a class="btn btn-outline-dark" href="/output">支出</a>
 				<h4 class="record">今月の支出履歴</h4>
@@ -91,9 +93,8 @@
 							<td>[[${output.outPrice}]]</td>
 							<td th:if="outList.CreatedAt">[[${output.CreatedAt}]]</td>
 							<td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
-							<td><a th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
-							<td><a
-								th:href="@{/output/delete/{id}(id=${output.outputId})}">削除</a></td>
+							<td><a class="link-primary" th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
+							<td><a class="link-primary" th:href="@{/output/delete/{id}(id=${output.outputId})}">削除</a></td>
 						</tr>
 					</tbody>
 				</table>

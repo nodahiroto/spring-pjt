@@ -68,3 +68,11 @@ footer {
 	height: 30px;
 	margin-right: 7px;
 }
+
+.chart-container {
+	height: 40vh;
+	width: 80vw;
+	margin-bottom: 200px;
+}
+
+
