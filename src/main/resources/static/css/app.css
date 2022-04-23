@@ -2,18 +2,7 @@ body {
 	background-color: #F0FFFF;
 }
 
-h3, a {
-	color: black;
-	font-size: 15px;
-	font-weight: 500;
-	text-decoration: none;
-}
-
-h3 {
-	font-size: 24px;
-	margin-right: auto;
-}
-
+/* ヘッダー */
 header {
 	height: 70px;
 	display: flex;
@@ -33,11 +22,25 @@ header {
 	padding: 0px 20px;
 }
 
+/* フッター */
 footer {
 	margin-top: 300px;
 	text-align: center;
 	font-size: 15px;
 	font-weight: 500;
+}
+
+/* ホーム画面 */
+h3, a {
+	color: black;
+	font-size: 15px;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+h3 {
+	font-size: 24px;
+	margin-right: auto;
 }
 
 .this_month {
@@ -59,6 +62,7 @@ footer {
 	margin-bottom: 50px;
 }
 
+/* 詳細画面 */
 .form-select-sm {
 	width: 25%;
 	margin-right: 5px;
@@ -75,4 +79,13 @@ footer {
 	margin-bottom: 200px;
 }
 
+/* ログイン画面 */
+.login-form {
+	width: 500px;
+	margin: 0 auto;
+}
 
+.login-title {
+	font-size: 30px;
+	text-align: center;
+}
