@@ -89,3 +89,14 @@ h3 {
 	font-size: 30px;
 	text-align: center;
 }
+
+/* ユーザー登録画面 */
+.register-title {
+	font-size: 30px;
+	text-align: center;
+}
+
+.register-form {
+	width: 500px;
+	margin: 0 auto;
+}

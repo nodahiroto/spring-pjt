@@ -4,38 +4,44 @@
 <meta charset="UTF-8">
 <link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/app.css}" rel="stylesheet">
-<title>ユーザー登録画面</title>
+<title>Register Page</title>
 </head>
 <body>
 <!-- ヘッダー -->
   <div th:replace="~{fragments/header::header}"></div>
-	<h2>ユーザー登録画面</h2>
+	
 	<div th:if="${success}">
-	  <h2 th:text="[[${success}]]"></h2>
-	  <a href="/home">ホーム画面へ</a>
+	  <div class="alert alert-success" role="alert" th:text="[[${success}]]"></div>
+	  <a class="link-primary" href="/home">ホーム画面へ</a>
 	</div>
 	<div th:if="${message}">
-	  <h2 th:text="[[${message}]]"></h2>
+	  <div class="alert alert-primary" role="alert" th:text="[[${message}]]"></div>
 	</div>
-	<form th:action="@{/register}" method="post" th:object="${appUser}">
-	    <div>
-	      <label for="username">ニックネーム</label>
-	      <input type="text" th:errorclass="is-invalid" th:field="*{username}">
-	      <div class="invalid-feedback" th:errors="*{username}"></div>
-	    </div>
-	    <div>
-	      <label for="email">メールアドレス</label>
-		  <input type="email" th:errorclass="is-invalid" th:field="*{email}">
-		  <div class="invalid-feedback" th:errors="*{email}"></div>
-	    </div>
-		<div>
-		  <label for="password">パスワード</label>
-		  <input type="password" th:errorclass="is-invalid" th:field="*{password}">
-		  <div class="invalid-feedback" th:errors="*{password}"></div>
+	
+	<h3 class="register-title my-5">ユーザー登録</h3>
+	<div class="register-form">
+		<div class="bg-white p-5 shadow">
+			<form th:action="@{/register}" method="post" th:object="${appUser}">
+				<div class="py-3">
+					<label for="email" class="form-label">メールアドレス</label>
+					<input type="email" class="form-control" th:errorclass="is-invalid" th:field="*{email}">
+					<div class="invalid-feedback" th:errors="*{email}"></div>
+				</div>
+				<div class="py-3">
+					<label for="password" class="form-label">パスワード</label>
+					<input type="password" class="form-control" th:errorclass="is-invalid" th:field="*{password}">
+					<div class="invalid-feedback" th:errors="*{password}"></div>
+				</div>
+				<div class="py-3" style="text-align: center">
+				  <input class="btn btn-primary" type="submit" value="登録">
+				</div>
+				<div class="py-3" style="text-align: center">
+				  <a class="link-primary" href="/login">ログインはこちら</a>
+				</div>
+			</form>
 		</div>
-		<button type="submit">登録</button>
-	</form>
-	<a href="/login">ログイン画面はこちら</a>
+	</div>
+
 	<!-- フッター -->
   <div th:replace="~{fragments/footer::footer}"></div>
 </body>
