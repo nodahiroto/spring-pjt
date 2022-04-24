@@ -85,6 +85,15 @@ h3 {
 	text-align: center;
 }
 
+.main-button {
+	margin-right: 30px;
+}
+
+.main-form {
+	width: 1000px;
+	margin: 0 auto;
+}
+
 /* ログイン画面 */
 .login-form {
 	width: 500px;
@@ -94,15 +103,5 @@ h3 {
 /* ユーザー登録画面 */
 .register-form {
 	width: 500px;
-	margin: 0 auto;
-}
-
-/* 入金画面 */
-.input-button {
-	margin-right: 30px;
-}
-
-.input-form {
-	width: 1000px;
 	margin: 0 auto;
 }
