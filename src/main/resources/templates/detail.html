@@ -5,87 +5,113 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/app.css}" rel="stylesheet">
-<title>詳細画面</title>
+<title>Detail Page</title>
 </head>
 <body>
   <!-- ヘッダー -->
   <div th:replace="~{fragments/header::header}"></div>
-<h2 th:text="${today}"></h2>
-<div th:text="${errorMonth}"></div>
-<form th:action="@{/month}" method="get">
-  <label for="number">月別の詳細を見る：</label>
-  <input type="text" name="number" required>月
-  <input type="submit" value="検索">
-</form>
-<form th:action="@{/detail}" method="get">
-  <p>並べ替え<br>
-  <select name="sort">
-    <option value="1">投稿順</option>
-    <option value="2">日付 昇順</option>
-    <option value="3">日付 降順</option>
-  </select>
-  <input type="submit" value="確認">
-  </p>
-</form>
-<p>入金履歴</p>
-<table>
-  <thead>
-    <tr>
-      <th>日付</th>
-      <th>メモ</th>
-      <th>金額</th>
-      <th>投稿日時</th>
-      <th>更新日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="inList : ${inputList}">
-      <td>[[${inList.inDate}]]</td>
-      <td>[[${inList.inContent}]]</td>
-      <td>[[${inList.inPrice}]]</td>
-      <td th:if="inList.CreatedAt">[[${inList.CreatedAt}]]</td>
-      <td th:if="inList.UpdatedAt">[[${inList.UpdatedAt}]]</td>
-      <td><a th:href="@{/input/edit/{id}(id=${inList.inputId})}">編集</a></td>
-      <td><a th:href="@{/input/delete/{id}(id=${inList.inputId})}">削除</a></td>
-    </tr>
-  </tbody>
-</table>
-<h4>入金合計：[[${allInput}]]</h4>
+  
+  <!-- エラーメッセージ -->
+  <div class="alert alert-danger" role="alert" th:if="${errorMonth}"></div>
+  
+  <div class="d-flex flex-column bd-highlight">
+		<div class="p-2 bd-highlight">
+			<div class="d-flex justify-content-center">
+				<h2 th:text="${today}"></h2>
+			</div>
+		</div>
+		<div class="p-2 bd-highlight">
+			<form class="d-flex justify-content-center mt-5" th:action="@{/month}" method="get">
+				<label for="number" class="form-label mt-1">月別の詳細を見る：　</label>
+				<input type="text" class="form-control-md" id="number" name="number" required> 月　
+				<input class="btn btn-outline-primary" type="submit" value="検索">
+			</form>
+		</div>
+		<div class="p-2 bd-highlight">
+			<form class="d-flex justify-content-center mt-3" th:action="@{/detail}" method="get">
+			    <label for="sort" class="form-label mt-2">並べ替え：　</label>
+				<select class="form-select form-select-sm" aria-label="Default select example" id="sort" name="sort">
+					<option value="1" selected>投稿順</option>
+					<option value="2">日付 昇順</option>
+					<option value="3">日付 降順</option>
+				</select>
+				<input class="btn btn-outline-primary" type="submit" value="確認">
+			</form>
+		</div>
+	</div>
 
-<p>支出履歴</p>
-<table>
-  <thead>
-    <tr>
-      <th>日付</th>
-      <th>メモ</th>
-      <th>金額</th>
-      <th>投稿日時</th>
-      <th>更新日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="outList : ${outputList}">
-      <td>[[${outList.outDate}]]</td>
-      <td>[[${outList.outContent}]]</td>
-      <td>[[${outList.outPrice}]]</td>
-      <td th:if="outList.CreatedAt">[[${outList.CreatedAt}]]</td>
-      <td th:if="outList.UpdatedAt">[[${outList.UpdatedAt}]]</td>
-      <td><a th:href="@{/output/edit/{id}(id=${outList.outputId})}">編集</a></td>
-      <td><a th:href="@{/output/delete/{id}(id=${outList.outputId})}">削除</a></td>
-    </tr>
-  </tbody>
-</table>
-<h4>支出合計：[[${allOutput}]]</h4>
-<a href="/home">ホーム画面に戻る</a>
+	<div class="chart-container">
+		<canvas id="myChart"></canvas>
+	</div>
 
-<div class="chart-container" style="position: relative; height:40vh; width:80vw">
-<canvas id="myChart"></canvas>
-</div>
-	<script type="text/javascript" th:inline="javascript">
+	<div class="container">
+		<div class="row">
+			<div class="col-6 mt-5">
+				<h4 class="record">入金履歴</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">日付</th>
+							<th scope="col">メモ</th>
+							<th scope="col">金額</th>
+							<th scope="col">投稿日時</th>
+							<th scope="col">更新日時</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="inList : ${inputList}">
+							<td>[[${inList.inDate}]]</td>
+							<td>[[${inList.inContent}]]</td>
+							<td>[[${inList.inPrice}]]</td>
+							<td th:if="inList.CreatedAt">[[${inList.CreatedAt}]]</td>
+							<td th:if="inList.UpdatedAt">[[${inList.UpdatedAt}]]</td>
+							<td><a class="link-primary" th:href="@{/input/edit/{id}(id=${inList.inputId})}">編集</a></td>
+							<td><a class="link-primary" th:href="@{/input/delete/{id}(id=${inList.inputId})}">削除</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4 class="mt-5">入金合計：[[${allInput}]]</h4>
+			</div>
+			
+			<div class="col-6 mt-5">
+				<h4 class="record">支出履歴</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">日付</th>
+							<th scope="col">メモ</th>
+							<th scope="col">金額</th>
+							<th scope="col">投稿日時</th>
+							<th scope="col">更新日時</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="outList : ${outputList}">
+							<td>[[${outList.outDate}]]</td>
+							<td>[[${outList.outContent}]]</td>
+							<td>[[${outList.outPrice}]]</td>
+							<td th:if="outList.CreatedAt">[[${outList.CreatedAt}]]</td>
+							<td th:if="outList.UpdatedAt">[[${outList.UpdatedAt}]]</td>
+							<td><a class="link-primary" th:href="@{/output/edit/{id}(id=${outList.outputId})}">編集</a></td>
+							<td><a class="link-primary" th:href="@{/output/delete/{id}(id=${outList.outputId})}">削除</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4 class="mt-5">支出合計：[[${allOutput}]]</h4>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" th:inline="javascript">
 	/*<![CDATA[*/
 		output_chart();
 		function output_chart() {
 			var ctx = document.getElementById("myChart").getContext("2d");
+			
 			var january = /*[[ ${January} ]]*/ 'default';
 			var february = /*[[${February}]]*/ 'default';
 			var march = /*[[${March}]]*/ 'default';
@@ -126,6 +152,8 @@
 							} ]
 						},
 						options : {
+							responsive: true,
+							
 							layout : {
 								padding : {
 									left : 400,
@@ -139,6 +167,7 @@
 		}
 		/*]]>*/
 	</script>
+	
 	<!-- フッター -->
   <div th:replace="~{fragments/footer::footer}"></div>
 </body>

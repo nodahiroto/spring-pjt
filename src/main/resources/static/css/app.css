@@ -1,21 +1,16 @@
-h3, a {
-	color: black;
-	font-size: 15px;
-	font-weight: 500;
-	text-decoration: none;
+body {
+	background-color: #F0FFFF;
 }
 
-h3 {
-	font-size: 26px;
-	margin-right: auto;
-}
-
+/* ヘッダー */
 header {
+	height: 70px;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	padding: 30px 10%;
-	margin-bottom: 20px;
+	padding: 15px 10%;
+	margin-bottom: 30px;
+	font-family: Georgia, serif;
 }
 
 .nav_links {
@@ -24,12 +19,107 @@ header {
 
 .nav_links li {
 	display: inline-block;
-	padding: 0 20px;
+	padding: 0px 20px;
 }
 
+/* フッター */
 footer {
-	margin-top: 200px;
+	margin-top: 300px;
 	text-align: center;
 	font-size: 15px;
 	font-weight: 500;
+}
+
+/* ホーム画面 */
+h3, a {
+	color: black;
+	font-size: 15px;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+h3 {
+	font-size: 24px;
+	margin-right: auto;
+}
+
+.this_month {
+	font-size: 25px;
+}
+
+.btn-outline-dark {
+	width: 140px;
+	height: 60px;
+	text-align: center;
+	font-size: 30px;
+	margin-left: 260px;
+}
+
+.record {
+	text-align: center;
+	margin-left: 30px;
+	margin-top: 80px;
+	margin-bottom: 50px;
+}
+
+/* 詳細画面 */
+.form-select-sm {
+	width: 25%;
+	margin-right: 5px;
+}
+
+.form-control-md {
+	height: 30px;
+	margin-right: 7px;
+}
+
+.chart-container {
+	height: 40vh;
+	width: 80vw;
+	margin-bottom: 200px;
+}
+
+/* 共通 */
+.main-title {
+	font-size: 30px;
+	text-align: center;
+}
+
+.main-button {
+	margin-right: 30px;
+}
+
+.main-form {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+/* ログイン画面 */
+.login-form {
+	width: 500px;
+	margin: 0 auto;
+}
+
+/* ユーザー登録画面 */
+.register-form {
+	width: 500px;
+	margin: 0 auto;
+}
+
+/* 月別詳細画面 */
+.month-detail-number {
+	font-size: 25px;
+	font-weight: 500;
+}
+
+.month-detail-budget {
+	font-size: 25px;
+	font-weight: 300;
+	text-decoration: underline;
+}
+
+.back {
+	text-align: center;
+	font-size: 20px;
+	margin-top: 100px;
 }

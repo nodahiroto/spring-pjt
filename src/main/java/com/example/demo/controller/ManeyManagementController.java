@@ -66,13 +66,6 @@ public class ManeyManagementController {
 		return "/home";
 	}
 	
-	@PostMapping("/reset")
-	public String reset(@AuthenticationPrincipal User user) {
-		// 予算のリセット処理
-		
-		return "redirect:/home";
-	}
-	
 	@GetMapping("/input")
 	public String inputForm(@ModelAttribute Input input, @AuthenticationPrincipal User user, Model model) {
 		
