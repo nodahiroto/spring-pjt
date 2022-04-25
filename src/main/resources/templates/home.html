@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}"
-	rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/app.css}" rel="stylesheet">
 <title>home</title>
 </head>
@@ -14,7 +14,7 @@
 <div class="alert alert-success" role="alert" th:if="${success}">[[${success}]]</div>
 <div class="alert alert-primary" role="alert" th:if="${message}">[[${message}]]</div>
 
-	<div class="d-flex flex-column bd-highlight mb-3">
+	<div class="d-flex flex-column bd-highlight">
 		<div class="p-2 bd-highlight">
 			<div class="d-flex justify-content-center">
 				<h2 th:text="${today}"></h2>
@@ -36,6 +36,10 @@
 				<div class="this_month" th:text="${totalNowAmmountMonth}"></div>
 			</div>
 		</div>
+	</div>
+	
+	<div class="pie-chart-container">
+		<canvas id="myPieChart"></canvas>
 	</div>
 
 	<div class="container">
@@ -102,6 +106,68 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+	this_month_chart();
+	function this_month_chart() {
+		var ctx = document.getElementById("myPieChart").getContext("2d");
+		
+		var input = /*[[ ${totalNowMonthInput} ]]*/ 'default';
+		var output = /*[[ ${totalNowMonthOutput} ]]*/ 'default';
+		
+		if(input == null && output == null) {
+			data = {
+					labels : ['今月の入力実績がありません。'],
+					datasets : [{
+						data : [1],
+						backgroundColor : [
+							'rgba(0, 128, 128, 1)'
+						]
+					}]
+			}
+		} else {
+			data = {
+					labels : [
+						'入金合計額',
+						'支出合計額'
+					],
+					
+					datasets : [{
+						data : [
+							input,
+							output
+						],
+						backgroundColor : [
+							'rgba(144, 238, 144, 1)',
+							'rgba(255, 255, 153, 1)',
+						]
+					}]
+				}
+		}
+		
+		new Chart(
+				ctx,
+				{
+					type : 'pie',
+					data : data,
+					
+					options : {
+						layout : {
+							padding : {
+								left : 400,
+								right : 0,
+								top : 150,
+								bottom : 150
+							}
+						}
+					}
+				}
+		)
+	}
+	/*]]>*/
+	</script>
+	
 	<!-- フッター -->
 	<div th:replace="~{fragments/footer::footer}"></div>
 </body>
