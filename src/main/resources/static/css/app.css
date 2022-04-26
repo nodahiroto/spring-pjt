@@ -1,5 +1,5 @@
 body {
-	background-color: #F0FFFF;
+	background-color: #DDFFFF;
 }
 
 /* ヘッダー */
@@ -47,7 +47,15 @@ h3 {
 	font-size: 25px;
 }
 
-.btn-outline-dark {
+.btn-outline-primary {
+	width: 140px;
+	height: 60px;
+	text-align: center;
+	font-size: 30px;
+	margin-left: 260px;
+}
+
+.btn-outline-success {
 	width: 140px;
 	height: 60px;
 	text-align: center;
@@ -64,7 +72,7 @@ h3 {
 
 /* 詳細画面 */
 .form-select-sm {
-	width: 25%;
+	width: 15%;
 	margin-right: 5px;
 }
 
@@ -92,6 +100,13 @@ h3 {
 .main-form {
 	width: 1000px;
 	margin: 0 auto;
+}
+
+.pie-chart-container {
+	height: 25vw;
+	width: 50vw;
+	margin-left: 270px;
+	margin-bottom: 400px;
 }
 
 /* ログイン画面 */
