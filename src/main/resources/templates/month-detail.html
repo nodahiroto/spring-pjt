@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/app.css}" rel="stylesheet">
 <title>Month Detail Page</title>
@@ -11,7 +12,7 @@
 <div th:replace="~{fragments/header::header}"></div>
   
 <!-- エラーメッセージ -->
-<div class="alert alert-danger" role="alert" th:if="${nullMonth}"></div>
+<div class="alert alert-danger" role="alert" th:if="${nullMonth}">[[${nullMonth}]]</div>
 
 	<div class="d-flex flex-column bd-highlight">
 		<div class="p-2 bd-highlight">
@@ -30,8 +31,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="pie-chart-container">
+	    <canvas id="monthPieChart"></canvas>
+	</div>
 
-<div class="container">
+    <div class="container">
 		<div class="row">
 			<div class="col-6 mt-5">
 				<h4 class="record">入金履歴</h4>
@@ -91,12 +96,75 @@
 				<h4 class="mt-5">支出合計：[[${TotalMonthOutput}]]</h4>
 			</div>
 		</div>
-</div>
-<div class="back">
-  <a class="link-primary" href="javascript:history.back();">戻る</a>
-</div>
+    </div>
+    <div class="back">
+        <a class="link-primary" href="javascript:history.back();">戻る</a>
+    </div>
+    
+    <script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+		
+	month_pie_chart();
+	function month_pie_chart() {
+		var ctx = document.getElementById("monthPieChart").getContext("2d");
+		
+		var mInput = /*[[ ${TotalMonthInput} ]]*/ 'default';
+		var mOutput = /*[[ ${TotalMonthOutput} ]]*/ 'default';
+		
+		if(mInput == null && mOutput == null) {
+			data = {
+					labels : ['入力実績がありません。'],
+					datasets : [{
+						data : [1],
+						backgroundColor : [
+							'rgba(0, 128, 128, 1)'
+						]
+					}]
+			}
+		} else {
+			data = {
+					labels : [
+						'入金合計額',
+						'支出合計額'
+					],
+					
+					datasets : [{
+						data : [
+							mInput,
+							mOutput
+						],
+						backgroundColor : [
+							'#0033FF',
+							'#00FF00',
+						]
+					}]
+				}
+		}
+		
+		new Chart(
+				ctx,
+				{
+					type : 'pie',
+					data : data,
+					
+					options : {
+						layout : {
+							padding : {
+								left : 400,
+								right : 0,
+								top : 150,
+								bottom : 150
+							}
+						}
+					}
+				}
+		)
+	}
+		
+	/*]]>*/
+	</script>
 
-<!-- フッター -->
+  <!-- フッター -->
   <div th:replace="~{fragments/footer::footer}"></div>
 </body>
 </html>

@@ -12,7 +12,7 @@
   <div th:replace="~{fragments/header::header}"></div>
   
   <!-- エラーメッセージ -->
-  <div class="alert alert-danger" role="alert" th:if="${errorMonth}"></div>
+  <div class="alert alert-danger" role="alert" th:if="${errorMonth}">[[${errorMonth}]]</div>
   
   <div class="d-flex flex-column bd-highlight">
 		<div class="p-2 bd-highlight">
