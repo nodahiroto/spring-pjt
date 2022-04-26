@@ -1,5 +1,5 @@
 body {
-	background-color: #F0FFFF;
+	background-color: #DDFFFF;
 }
 
 /* ヘッダー */
@@ -47,7 +47,15 @@ h3 {
 	font-size: 25px;
 }
 
-.btn-outline-dark {
+.btn-outline-primary {
+	width: 140px;
+	height: 60px;
+	text-align: center;
+	font-size: 30px;
+	margin-left: 260px;
+}
+
+.btn-outline-success {
 	width: 140px;
 	height: 60px;
 	text-align: center;
@@ -71,7 +79,7 @@ h3 {
 
 /* 詳細画面 */
 .form-select-sm {
-	width: 25%;
+	width: 15%;
 	margin-right: 5px;
 }
 
