@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script type="text/javascript" th:src="@{/js/pop-up.js}"></script>
 <link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/app.css}" rel="stylesheet">
 <title>home</title>
@@ -68,7 +69,7 @@
 							<td th:if="inList.CreatedAt">[[${input.CreatedAt}]]</td>
 							<td th:if="inList.UpdatedAt">[[${input.UpdatedAt}]]</td>
 							<td><a class="link-primary" th:href="@{/input/edit/{id}(id=${input.inputId})}">編集</a></td>
-							<td><a class="link-primary" th:href="@{/input/delete/{id}(id=${input.inputId})}">削除</a></td>
+							<td><a id="delete" class="link-primary" th:href="@{/input/delete/{id}(id=${input.inputId})}">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -98,7 +99,7 @@
 							<td th:if="outList.CreatedAt">[[${output.CreatedAt}]]</td>
 							<td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
 							<td><a class="link-primary" th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
-							<td><a class="link-primary" th:href="@{/output/delete/{id}(id=${output.outputId})}">削除</a></td>
+							<td><a id="delete" class="link-primary" th:href="@{/output/delete/{id}(id=${output.outputId})}">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
