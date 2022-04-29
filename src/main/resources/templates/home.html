@@ -68,7 +68,8 @@
 							<td th:if="inList.CreatedAt">[[${input.CreatedAt}]]</td>
 							<td th:if="inList.UpdatedAt">[[${input.UpdatedAt}]]</td>
 							<td><a class="link-primary" th:href="@{/input/edit/{id}(id=${input.inputId})}">編集</a></td>
-							<td><a class="link-primary" th:href="@{/input/delete/{id}(id=${input.inputId})}">削除</a></td>
+							<td><a class="link-primary"
+							th:href="@{/input/delete/{id}(id=${input.inputId})}" onclick="btnClick();">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -98,7 +99,8 @@
 							<td th:if="outList.CreatedAt">[[${output.CreatedAt}]]</td>
 							<td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
 							<td><a class="link-primary" th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
-							<td><a class="link-primary" th:href="@{/output/delete/{id}(id=${output.outputId})}">削除</a></td>
+							<td><a class="link-primary"
+							th:href="@{/output/delete/{id}(id=${output.outputId})}" onclick="return btnClick();">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -165,6 +167,17 @@
 				}
 		)
 	}
+	
+	function btnClick() {
+		
+		if(window.confirm('本当に削除してよろしいでしょうか？')) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
 	/*]]>*/
 	</script>
 	
