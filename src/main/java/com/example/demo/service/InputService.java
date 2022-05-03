@@ -26,5 +26,21 @@ public class InputService {
 		input.setUpdatedAt(LocalDateTime.now());
 		inputRepository.save(input);
 	}
+	
+	public boolean checkNowMonthInput() {
+		
+		if (null == inputRepository.getNowMonthInput()) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean checkTotalNowMonthInput() {
+		
+		Integer result = inputRepository.getTotalNowMonthInput();
+		
+		return true;
+	}
 
 }
