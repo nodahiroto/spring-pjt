@@ -28,14 +28,13 @@
 			</form>
 		</div>
 		<div class="p-2 bd-highlight">
-			<form class="d-flex justify-content-center mt-3" th:action="@{/detail}" method="get">
+			<form class="d-flex justify-content-center mt-3" th:action="@{/detail}" method="get" onchange="submit(this.form)">
 			    <label for="sort" class="form-label mt-2">並べ替え：　</label>
 				<select class="form-select form-select-sm" aria-label="Default select example" id="sort" name="sort">
 					<option value="1" selected>投稿順</option>
 					<option value="2">日付 昇順</option>
 					<option value="3">日付 降順</option>
 				</select>
-				<input class="btn btn-info" type="submit" value="確認">
 			</form>
 		</div>
 	</div>
