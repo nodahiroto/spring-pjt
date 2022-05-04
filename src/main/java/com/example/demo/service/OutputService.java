@@ -61,4 +61,23 @@ public class OutputService {
 		return totalMonth;
 	}
 	
+	public boolean checkNowMonthOutput() {
+		
+		if (null == outputRepository.getNowMonthOutput()) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean checkTotalNowMonthOutput() {
+		
+		boolean result = false;
+		Integer num = outputRepository.getTotalNowMonthOutput();
+		
+		if (null != num) {
+			result = true;
+		}
+		return result;
+	}
 }

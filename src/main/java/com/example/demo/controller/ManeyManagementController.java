@@ -65,9 +65,16 @@ public class ManeyManagementController {
 		}
 		
 		// 今月の支出データ一覧を取得
-		model.addAttribute("nowMonthOutput", outputRepository.findNowMonthOutput());
+		boolean resultOutput = outputService.checkNowMonthOutput();
+		if(resultOutput) {
+			model.addAttribute("nowMonthOutput", outputRepository.findNowMonthOutput());
+		}
+		
 		// 今月の支出金額合計
-		model.addAttribute("totalNowMonthOutput", outputRepository.getTotalNowMonthOutput());
+		boolean resultTotalOutput = outputService.checkTotalNowMonthOutput();
+		if(resultTotalOutput) {
+			model.addAttribute("totalNowMonthOutput", outputRepository.getTotalNowMonthOutput());
+		}
 		
 		// 今月の予算
 		model.addAttribute("totalNowAmmountMonth", budgetService.countNowMonthBudget());
