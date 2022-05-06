@@ -43,14 +43,12 @@ public class BudgetSevice {
 		int totoalNowMonthOutput = 0;
 		
 		// 入金の合計
-		Integer input = inputRepository.getTotalNowMonthInput();
-		if(input != null) {
+		if(null != inputRepository.getTotalNowMonthInput()) {
 			totalNowMonthInput = inputRepository.getTotalNowMonthInput();
 		}
 		
 		// 支出の合計
-		Integer output = outputRepository.getTotalNowMonthOutput();
-		if(output != null) {
+		if(null != outputRepository.getTotalNowMonthOutput()) {
 			totoalNowMonthOutput = outputRepository.getTotalNowMonthOutput();
 		}
 		

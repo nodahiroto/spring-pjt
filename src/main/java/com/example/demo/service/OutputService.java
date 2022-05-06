@@ -73,9 +73,8 @@ public class OutputService {
 	public boolean checkTotalNowMonthOutput() {
 		
 		boolean result = false;
-		Integer num = outputRepository.getTotalNowMonthOutput();
 		
-		if (null != num) {
+		if (null != outputRepository.getTotalNowMonthOutput()) {
 			result = true;
 		}
 		return result;

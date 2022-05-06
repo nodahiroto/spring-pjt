@@ -39,9 +39,8 @@ public class InputService {
 	public boolean checkTotalNowMonthInput() {
 		
 		boolean result = false;
-		Integer num = inputRepository.getTotalNowMonthInput();
 		
-		if (null != num) {
+		if (null != inputRepository.getTotalNowMonthInput()) {
 			result = true;
 		}
 		return result;

@@ -63,7 +63,7 @@ public class ManeyManagementController {
 		if(resultTotalInput) {
 			model.addAttribute("totalNowMonthInput", inputRepository.getTotalNowMonthInput());
 		}
-		
+
 		// 今月の支出データ一覧を取得
 		boolean resultOutput = outputService.checkNowMonthOutput();
 		if(resultOutput) {
