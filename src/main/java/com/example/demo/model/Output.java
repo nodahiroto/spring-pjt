@@ -36,7 +36,7 @@ public class Output {
 	@Min(1)
 	@Max(1000000)
 	@Column(name = "out_price")
-	private int outPrice;
+	private Integer outPrice;
 	
 	@Column(name = "out_content")
 	private String outContent;

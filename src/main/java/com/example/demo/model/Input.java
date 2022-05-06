@@ -36,7 +36,7 @@ public class Input {
 	@Min(1)
 	@Max(1000000)
 	@Column(name = "in_price")
-	private int inPrice;
+	private Integer inPrice;
 	
 	@Column(name = "in_content")
 	private String inContent;

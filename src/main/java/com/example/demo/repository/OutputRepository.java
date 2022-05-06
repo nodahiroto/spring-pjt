@@ -14,7 +14,7 @@ public interface OutputRepository extends JpaRepository<Output, Long> {
 
 	    // 支出の合計額
 		@Query(value = "select SUM(out_price) from many_outputs", nativeQuery = true)
-		public int getAllOutput();
+		public Integer getAllOutput();
 		
 		// 月別の支出合計金額
 		@Query(value = "SELECT DATE_FORMAT(out_date, '%Y%m') as YM, SUM(out_price) "
@@ -44,11 +44,11 @@ public interface OutputRepository extends JpaRepository<Output, Long> {
 		
 		// 現在の月の合計金額
 		@Query(value = "SELECT SUM(out_price) FROM many_outputs WHERE MONTH(out_date) = MONTH(CURRENT_DATE())", nativeQuery = true)
-		public int getTotalNowMonthOutput();
+		public Integer getTotalNowMonthOutput();
 		
 		// 特定の月の合計金額
 		@Query(value = "SELECT SUM(out_price) FROM many_outputs WHERE MONTH(out_date) = :month", nativeQuery = true)
-		public int getTotalMonthOutput(@Param("month") int month);
+		public Integer getTotalMonthOutput(@Param("month") int month);
 		
 		// 特定の月のデータが存在するかチェック
 		@Query(value = "SELECT EXISTS(SELECT * FROM many_outputs WHERE MONTH(out_date) = :month)", nativeQuery = true)

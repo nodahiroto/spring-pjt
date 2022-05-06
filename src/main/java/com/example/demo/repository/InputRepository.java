@@ -14,7 +14,7 @@ public interface InputRepository extends JpaRepository<Input, Long> {
 
 	// 入金の合計額
 	@Query(value = "select SUM(in_price) from many_inputs", nativeQuery = true)
-	public int getAllInput();
+	public Integer getAllInput();
 	
 	// 月別の入金合計金額
 	@Query(value = "SELECT DATE_FORMAT(in_date, '%Y%m') as YM, SUM(in_price) "
@@ -40,11 +40,11 @@ public interface InputRepository extends JpaRepository<Input, Long> {
 	
 	// 現在の月の合計金額
 	@Query(value = "SELECT SUM(in_price) FROM many_inputs WHERE MONTH(in_date) = MONTH(CURRENT_DATE())", nativeQuery = true)
-	public int getTotalNowMonthInput();
+	public Integer getTotalNowMonthInput();
 	
 	// 特定の月の合計金額
 	@Query(value = "SELECT SUM(in_price) FROM many_inputs WHERE MONTH(in_date) = :month", nativeQuery = true)
-	public int getTotalMonthInput(@Param("month") int month);
+	public Integer getTotalMonthInput(@Param("month") int month);
 	
 	// 全データを取得(日付 昇順)
 	@Query(value = "SELECT * FROM many_inputs ORDER BY in_date", nativeQuery = true)
