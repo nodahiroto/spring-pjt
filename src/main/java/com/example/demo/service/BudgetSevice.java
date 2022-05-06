@@ -38,12 +38,26 @@ public class BudgetSevice {
 	
 	// 今月の計算
 	public int countNowMonthBudget() {
-		// 入金の合計
-		int totalNowMonthInput = inputRepository.getTotalNowMonthInput();
-		// 支出の合計
-		int totoalNowMonthOutput = outputRepository.getTotalNowMonthOutput();
+		int totalNowAmmountMonth = 0;
+		int totalNowMonthInput = 0;
+		int totoalNowMonthOutput = 0;
 		
-		int totalNowAmmountMonth = totalNowMonthInput - totoalNowMonthOutput;
+		// 入金の合計
+		if(null != inputRepository.getTotalNowMonthInput()) {
+			totalNowMonthInput = inputRepository.getTotalNowMonthInput();
+		}
+		
+		// 支出の合計
+		if(null != outputRepository.getTotalNowMonthOutput()) {
+			totoalNowMonthOutput = outputRepository.getTotalNowMonthOutput();
+		}
+		
+		totalNowAmmountMonth = totalNowMonthInput - totoalNowMonthOutput;
+		
+		if(totalNowAmmountMonth < 0) {
+			totoalNowMonthOutput = 0;
+		}
+		
 		return totalNowAmmountMonth;
 	}
 	
