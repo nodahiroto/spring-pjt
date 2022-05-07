@@ -111,7 +111,7 @@
 		var mInput = /*[[ ${TotalMonthInput} ]]*/ 'default';
 		var mOutput = /*[[ ${TotalMonthOutput} ]]*/ 'default';
 		
-		if(mInput == null && mOutput == null) {
+		if(mInput == 0 && mOutput == 0) {
 			data = {
 					labels : ['入力実績がありません。'],
 					datasets : [{

@@ -118,7 +118,7 @@
 		var input = /*[[ ${totalNowMonthInput} ]]*/ 'default';
 		var output = /*[[ ${totalNowMonthOutput} ]]*/ 'default';
 		
-		if(input == null && output == null) {
+		if(input == 0 && output == 0) {
 			data = {
 					labels : ['今月の入力実績がありません。'],
 					datasets : [{
