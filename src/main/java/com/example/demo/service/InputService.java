@@ -45,5 +45,16 @@ public class InputService {
 		}
 		return result;
 	}
+	
+	public Integer checkTotalMonthInput(int number) {
+		
+		if (null != inputRepository.getTotalMonthInput(number)) {
+			
+			return inputRepository.getTotalMonthInput(number);
+		} else {
+			
+			return 0;
+		}
+	}
 
 }

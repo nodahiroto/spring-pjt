@@ -79,4 +79,15 @@ public class OutputService {
 		}
 		return result;
 	}
+	
+	public Integer checkTotalMonthOutput(int number) {
+		
+		if (null != outputRepository.getTotalMonthOutput(number)) {
+			
+			return outputRepository.getTotalMonthOutput(number);
+		} else {
+			
+			return 0;
+		}
+	}
 }
