@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/app.css}" rel="stylesheet">
 <title>home</title>
@@ -170,12 +171,22 @@
 	
 	function btnClick() {
 		
-		if(window.confirm('本当に削除してよろしいでしょうか？')) {
+		/* if(window.confirm('本当に削除してよろしいでしょうか？')) {
 			return true;
 		} else {
 			return false;
-		}
-		
+		} */
+
+		Swal.fire({
+			title: '削除の確認',
+			text: '本当に削除してよろしいでしょうか？',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'OK',
+			cancelButtonText: 'キャンセル'
+		}).then((result) => {
+			return true
+		});
 	}
 	
 	/*]]>*/
