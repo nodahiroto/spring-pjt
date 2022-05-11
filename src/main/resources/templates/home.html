@@ -101,7 +101,7 @@
 							<td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
 							<td><a class="link-primary" th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
 							<td><a class="link-primary"
-							th:href="@{/output/delete/{id}(id=${output.outputId})}" onclick="btnClick();">削除</a></td>
+							th:href="@{/output/delete/{id}(id=${output.outputId})}" onclick="btnClick(); return false;">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -170,7 +170,6 @@
 	}
 	
 	function btnClick() {
-
 		Swal.fire({
 			  title: '削除の確認',
 			  text: "本当に削除してよろしいでしょうか？",
@@ -179,38 +178,22 @@
 			  confirmButtonColor: '#3085d6',
 			  cancelButtonColor: '#d33',
 			  confirmButtonText: '削除'
-			}).then((result) => {
-				if (result.isConfirmed) {
+			}).then(function(result) {
+				if (result.value) {
 				    Swal.fire(
-				      'Deleted!',
-				      'Your file has been deleted.',
+				      '削除',
+				      'データを削除しました。',
 				      'success'
 				    )
 				}
-		})
+		    })
 	}
-	
+
 	/* if(window.confirm('本当に削除してよろしいでしょうか？')) {
-	return true;
-    } else {
-	return false;
-    } */
-	
-	
-	/* document.getElementById("confirm").onclick = function() {
-		var options = {
-				text: '本当に削除してよろしいでしょうか？',
-				buttons: {
-					cancel: 'キャンセル',
-					ok: '削除'
-				}
-		};
-		swal(options).then(function(result) {
-			if(result) {
-				return true;
-			}
-		});
-	}; */
+		return true;
+	    } else {
+		return false;
+	    } */
 	
 	/*]]>*/
 	</script>
