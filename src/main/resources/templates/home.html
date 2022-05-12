@@ -101,7 +101,9 @@
 							<td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
 							<td><a class="link-primary" th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
 							<td><a class="link-primary"
-							th:href="@{/output/delete/{id}(id=${output.outputId})}" onclick="btnClick(); return false;">削除</a></td>
+							th:href="@{/output/delete/{id}(id=${output.outputId})}" onclick="btnClick();">削除</a></td>
+							<!-- <td><a class="link-primary"
+							th:href="@{/output/delete/{id}(id=${output.outputId})}" id="btnconf">削除</a></td> -->
 						</tr>
 					</tbody>
 				</table>
@@ -169,33 +171,30 @@
 		)
 	}
 	
-	function btnClick() {
-		Swal.fire({
-			  title: '削除の確認',
-			  text: "本当に削除してよろしいでしょうか？",
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: '削除'
+	/* function btnClick() {} */
+
+
+			Swal.fire({
+				title : '削除の確認',
+				text : "本当に削除してよろしいでしょうか？",
+				icon : 'warning',
+				showCancelButton : true,
+				confirmButtonColor : '#3085d6',
+				cancelButtonColor : '#d33',
+				confirmButtonText : '削除'
 			}).then(function(result) {
 				if (result.value) {
-				    Swal.fire(
-				      '削除',
-				      'データを削除しました。',
-				      'success'
-				    )
+					Swal.fire('削除', 'データを削除しました。', 'success')
 				}
-		    })
-	}
+			})
 
-	/* if(window.confirm('本当に削除してよろしいでしょうか？')) {
-		return true;
-	    } else {
-		return false;
-	    } */
-	
-	/*]]>*/
+		/* if(window.confirm('本当に削除してよろしいでしょうか？')) {
+			return true;
+		    } else {
+			return false;
+		    } */
+
+		/*]]>*/
 	</script>
 	
 	<!-- フッター -->
