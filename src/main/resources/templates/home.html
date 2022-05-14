@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.13/dist/sweetalert2.all.min.js"></script>
 <link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
@@ -100,10 +101,11 @@
 							<td th:if="outList.CreatedAt">[[${output.CreatedAt}]]</td>
 							<td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
 							<td><a class="link-primary" th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
-							<td><a class="link-primary"
-							th:href="@{/output/delete/{id}(id=${output.outputId})}" onclick="btnClick(id); return false;">削除</a></td>
 							<!-- <td><a class="link-primary"
-							th:href="@{/output/delete/{id}(id=${output.outputId})}" id="btnconf">削除</a></td> -->
+							th:href="@{/output/delete/{id}(id=${output.outputId})}"
+							onclick="btnClick();">削除</a></td> -->
+							<td><a class="link-primary"
+							th:href="@{/output/delete/{id}(id=${output.outputId})}" id="conf">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -171,39 +173,54 @@
 		)
 	}
 	
-	function btnClick(id) {
-		
-		/* onclick if文 */
-		
-		/* var e = e || window.event;
-		var elem = e.target || e.srcElement; 
-		var elemId = elem.id; */
-		var id = id;
-		
-		Swal.fire({
-			title : '削除の確認',
-			text : "本当に削除してよろしいでしょうか？",
-			icon : 'warning',
-			showCancelButton : true,
-			confirmButtonColor : '#3085d6',
-			cancelButtonColor : '#d33',
-			confirmButtonText : '削除'
-		}).then(function(result) {
-			if (result.value) {
-				const baselink = /*[[@{/output/delete}]]*/'';
-				const link = baselink + "?id=" + id;
-				Swal.fire('削除',
-						'データを削除しました。',
-						'success'
-						).then(function(){
-							location.href// 遷移先？
-						});
-			}
-		})
-	}
+	
+		$(function() {
+			$('#conf').click(function(e) {
+				e.preventDefault();
 
-
+			});
 			
+			Swal.fire({
+				title : '削除の確認',
+				text : "本当に削除してよろしいでしょうか？",
+				icon : 'warning',
+				showCancelButton : true,
+				confirmButtonColor : '#3085d6',
+				cancelButtonColor : '#d33',
+				confirmButtonText : '削除'
+			}).then(function(result) {
+				if (result.value) {
+					Swal.fire('削除',
+							'データを削除しました。',
+							'success'
+							).then(function() {
+								$('#conf').off();
+							})
+				}
+			})
+
+		});
+
+		/* function btnClick() {
+
+			Swal.fire({
+				title : '削除の確認',
+				text : "本当に削除してよろしいでしょうか？",
+				icon : 'warning',
+				showCancelButton : true,
+				confirmButtonColor : '#3085d6',
+				cancelButtonColor : '#d33',
+				confirmButtonText : '削除'
+			}).then(function(result) {
+				if (result.value) {
+
+					return true;
+					Swal.fire('削除', 'データを削除しました。', 'success')
+				} else {
+					return false;
+				}
+			})
+		} */
 
 		/* if(window.confirm('本当に削除してよろしいでしょうか？')) {
 			return true;
