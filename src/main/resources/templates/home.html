@@ -175,28 +175,28 @@
 	
 	
 		$(function() {
-			$('#conf').click(function(e) {
+			$(document).on('click', '#conf', function(e) {
+				
 				e.preventDefault();
-
-			});
-			
-			Swal.fire({
-				title : '削除の確認',
-				text : "本当に削除してよろしいでしょうか？",
-				icon : 'warning',
-				showCancelButton : true,
-				confirmButtonColor : '#3085d6',
-				cancelButtonColor : '#d33',
-				confirmButtonText : '削除'
-			}).then(function(result) {
-				if (result.value) {
-					Swal.fire('削除',
-							'データを削除しました。',
-							'success'
-							).then(function() {
-								$('#conf').off();
-							})
-				}
+				
+				Swal.fire({
+					title : '削除の確認',
+					text : "本当に削除してよろしいでしょうか？",
+					icon : 'warning',
+					showCancelButton : true,
+					confirmButtonColor : '#3085d6',
+					cancelButtonColor : '#d33',
+					confirmButtonText : '削除'
+				}).then(function(result) {
+					if (result.value) {
+						Swal.fire('削除', 'データを削除しました。', 'success')
+						$('#conf').off("click");
+						// リンクの再読み込み？
+					}
+				})
+				
+				
+				
 			})
 
 		});
