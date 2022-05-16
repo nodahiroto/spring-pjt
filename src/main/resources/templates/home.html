@@ -104,8 +104,8 @@
 							<!-- <td><a class="link-primary"
 							th:href="@{/output/delete/{id}(id=${output.outputId})}"
 							onclick="btnClick();">削除</a></td> -->
-							<td><a class="link-primary"
-							th:href="@{/output/delete/{id}(id=${output.outputId})}" id="conf">削除</a></td>
+							<td><a class="link-primary link-out"
+							th:href="@{/output/delete/{id}(id=${output.outputId})}" id="conf" data-out="${output.outputId}">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -177,6 +177,11 @@
 		$(function() {
 			$(document).on('click', '#conf', function(e) {
 				
+				// URLパラメーターから取得？
+				
+				const outputId = $('#conf').data('out');
+				console.log(outputId);
+				
 				e.preventDefault();
 				
 				Swal.fire({
@@ -190,8 +195,10 @@
 				}).then(function(result) {
 					if (result.value) {
 						Swal.fire('削除', 'データを削除しました。', 'success')
-						$('#conf').off("click");
-						// リンクの再読み込み？
+						$('#conf').off(e);
+						$('#conf').trigger("click");
+						
+						// リンク先を記入
 					}
 				})
 				
