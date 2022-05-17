@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.13/dist/sweetalert2.all.min.js"></script>
 <link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/app.css}" rel="stylesheet">
 <title>home</title>
@@ -99,8 +101,11 @@
 							<td th:if="outList.CreatedAt">[[${output.CreatedAt}]]</td>
 							<td th:if="outList.UpdatedAt">[[${output.UpdatedAt}]]</td>
 							<td><a class="link-primary" th:href="@{/output/edit/{id}(id=${output.outputId})}">編集</a></td>
-							<td><a class="link-primary"
-							th:href="@{/output/delete/{id}(id=${output.outputId})}" onclick="return btnClick();">削除</a></td>
+							<!-- <td><a class="link-primary"
+							th:href="@{/output/delete/{id}(id=${output.outputId})}"
+							onclick="btnClick();">削除</a></td> -->
+							<td><a class="link-primary link-out"
+							th:href="@{/output/delete/{id}(id=${output.outputId})}" id="conf" data-out="${output.outputId}">削除</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -168,17 +173,41 @@
 		)
 	}
 	
-	function btnClick() {
-		
-		if(window.confirm('本当に削除してよろしいでしょうか？')) {
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
 	
-	/*]]>*/
+		$(function() {
+			$(document).on('click', '#conf', function(e) {
+				
+				// URLパラメーターから取得？
+                /* const outputId = $('#conf').data('out');
+				console.log(outputId); */
+				
+				e.preventDefault();
+				
+				Swal.fire({
+					title : '削除の確認',
+					text : "本当に削除してよろしいでしょうか？",
+					icon : 'warning',
+					showCancelButton : true,
+					confirmButtonColor : '#3085d6',
+					cancelButtonColor : '#d33',
+					confirmButtonText : '削除'
+				}).then(function(result) {
+					if (result.value) {
+						Swal.fire('削除', 'データを削除しました。', 'success')
+						$('#conf').off(e);
+						$('#conf').trigger("click");
+						
+						// リンク先を記入
+					}
+				})
+				
+				
+				
+			})
+
+		});
+
+		/*]]>*/
 	</script>
 	
 	<!-- フッター -->

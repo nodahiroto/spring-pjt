@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.repository.InputRepository;
 import com.example.demo.repository.OutputRepository;
 import com.example.demo.service.BudgetSevice;
+import com.example.demo.service.InputService;
+import com.example.demo.service.OutputService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class MonthController {
 	
+	private final InputService inputService;
+	private final OutputService outputService;
 	private final InputRepository inputRepository;
 	private final OutputRepository outputRepository;
 	private final BudgetSevice budgetService;
@@ -41,8 +45,8 @@ public class MonthController {
 		}
 		
 		try {
-			model.addAttribute("TotalMonthInput", inputRepository.getTotalMonthInput(number));
-			model.addAttribute("TotalMonthOutput", outputRepository.getTotalMonthOutput(number));
+			model.addAttribute("TotalMonthInput", inputService.checkTotalMonthInput(number));
+			model.addAttribute("TotalMonthOutput", outputService.checkTotalMonthOutput(number));
 			model.addAttribute("totalAmmountMonth", "残高：" + budgetService.countMonthBudget(number));
 		} catch (Exception e) {
 			model.addAttribute("nullMonth", "データがありません。");

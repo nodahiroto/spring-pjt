@@ -36,14 +36,26 @@ public class InputService {
 		return true;
 	}
 	
-	public boolean checkTotalNowMonthInput() {
-		
-		boolean result = false;
+	public Integer checkTotalNowMonthInput() {
 		
 		if (null != inputRepository.getTotalNowMonthInput()) {
-			result = true;
+			
+			return inputRepository.getTotalNowMonthInput();
+		} else {
+			
+			return 0;
 		}
-		return result;
+	}
+	
+	public Integer checkTotalMonthInput(int number) {
+		
+		if (null != inputRepository.getTotalMonthInput(number)) {
+			
+			return inputRepository.getTotalMonthInput(number);
+		} else {
+			
+			return 0;
+		}
 	}
 
 }

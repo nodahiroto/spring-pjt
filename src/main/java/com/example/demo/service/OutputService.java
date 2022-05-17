@@ -70,13 +70,25 @@ public class OutputService {
 		return true;
 	}
 	
-	public boolean checkTotalNowMonthOutput() {
-		
-		boolean result = false;
+	public Integer checkTotalNowMonthOutput() {
 		
 		if (null != outputRepository.getTotalNowMonthOutput()) {
-			result = true;
+			
+			return outputRepository.getTotalNowMonthOutput();
+		} else {
+		
+			return 0;
 		}
-		return result;
+	}
+	
+	public Integer checkTotalMonthOutput(int number) {
+		
+		if (null != outputRepository.getTotalMonthOutput(number)) {
+			
+			return outputRepository.getTotalMonthOutput(number);
+		} else {
+			
+			return 0;
+		}
 	}
 }

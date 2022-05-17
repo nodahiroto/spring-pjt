@@ -63,12 +63,26 @@ public class BudgetSevice {
 	
 	// 特定の月の計算
 	public int countMonthBudget(int number) {
-		// 入金の合計
-		int totalMonthInput = inputRepository.getTotalMonthInput(number);
-		// 支出の合計
-		int totalMonthOutput = outputRepository.getTotalMonthOutput(number);
 		
-		int totalAmmountMonth = totalMonthInput - totalMonthOutput;
+		int totalMonthInput = 0;
+		int totalMonthOutput = 0;
+		int totalAmmountMonth = 0;
+		
+		// 入金の合計
+		if (null != inputRepository.getTotalMonthInput(number)) {
+			totalMonthInput = inputRepository.getTotalMonthInput(number);
+		}
+		
+		// 支出の合計
+		if (null != outputRepository.getTotalMonthOutput(number)) {
+			totalMonthOutput = outputRepository.getTotalMonthOutput(number);
+		}
+		
+		totalAmmountMonth = totalMonthInput - totalMonthOutput;
+		
+		if(totalAmmountMonth < 0) {
+			totalAmmountMonth = 0;
+		}
 		return totalAmmountMonth;
 	}
 	
